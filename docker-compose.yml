@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  janitor:
+    build: .
+    container_name: janitor-bot
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./janitor:/app/janitor:ro
+    restart: unless-stopped
+    networks:
+      - janitor-net
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+  
+  metrics:
+    build: .
+    container_name: janitor-metrics
+    command: ["python", "-m", "janitor.metrics"]
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data:ro
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - janitor-net
+    depends_on:
+      - janitor
+
+networks:
+  janitor-net:
+    driver: bridge
