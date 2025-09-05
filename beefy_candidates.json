@@ -1,0 +1,69 @@
+[
+  {
+    "id": "curve-arb-asdcrv-v2.1",
+    "name": "CRV/vsdCRV/asdCRV",
+    "earnContractAddress": "0x0165384487d26b3bb71aE2f3e26635071b71CC25",
+    "strategy": "0x380f439dff78d2C18308b4f8089261d9a5231B86",
+    "assets": [
+      "CRV",
+      "vsdCRV",
+      "asdCRV"
+    ],
+    "callFeeBps": 0,
+    "tvl": 0,
+    "apy": 0
+  },
+  {
+    "id": "balancerv3-arbitrum-waarbweth-reth",
+    "name": "WETH/rETH V3",
+    "earnContractAddress": "0x03F1aA37749D1226B2F147e00f8e219d1179C9c5",
+    "strategy": "0xd52415e29E93572129ccD72baF05C3a6FE2A17b9",
+    "assets": [
+      "waArbWETH",
+      "rETH"
+    ],
+    "callFeeBps": 0,
+    "tvl": 0,
+    "apy": 0
+  },
+  {
+    "id": "uniswap-cow-arb-wbtc-tbtc-vault",
+    "name": "tBTC-WBTC",
+    "earnContractAddress": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+    "strategy": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+    "assets": [
+      "tBTC",
+      "WBTC"
+    ],
+    "callFeeBps": 0,
+    "tvl": 0,
+    "apy": 0
+  },
+  {
+    "id": "balancerv3-arbitrum-waarbusdcn-waarbusdt-waarbgho",
+    "name": "USDC/USDT/GHO V3",
+    "earnContractAddress": "0x14B85C31975b4f400dDbb6313957A79e0387f1c6",
+    "strategy": "0xCcA14Cac1aFD72bc6fb964850936B7a51AEa1E24",
+    "assets": [
+      "waArbUSDCn",
+      "waArbUSDT",
+      "waArbGHO"
+    ],
+    "callFeeBps": 0,
+    "tvl": 0,
+    "apy": 0
+  },
+  {
+    "id": "uniswap-cow-arb-weth-dai-vault",
+    "name": "DAI-WETH",
+    "earnContractAddress": "0x155aEbAe69B3Fa2D135146Df6fECa0F8D6FabDD6",
+    "strategy": "0xd414FF0137d3d1aC2d4f5731977f3bE337E6fA7b",
+    "assets": [
+      "DAI",
+      "WETH"
+    ],
+    "callFeeBps": 0,
+    "tvl": 0,
+    "apy": 0
+  }
+]

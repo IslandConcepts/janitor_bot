@@ -1,0 +1,91 @@
+{
+  "chains": {
+    "arbitrum": {
+      "chainId": 42161,
+      "rpc": ["ARBITRUM_RPC_1", "ARBITRUM_RPC_2"],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": { 
+        "harvest": 900000,
+        "twap": 300000,
+        "compound": 800000
+      },
+      "maxBaseFeeGwei": "MAX_BASE_FEE_GWEI",
+      "fromEnvKey": "ARBITRUM_FROM_ADDRESS",
+      "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "GMX_RewardRouter",
+          "address": "0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1",
+          "abi": "abi/gmx_reward.json",
+          "type": "compound",
+          "enabled": false,
+          "_note": "GMX Reward Router V2 - has compound() function",
+          "_verify": "https://arbiscan.io/address/0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1#code",
+          "read": {
+            "pendingRewards": "claimableRewards"
+          },
+          "write": {
+            "exec": "compound"
+          },
+          "params": [],
+          "rewardToken": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "GMX",
+          "rewardPriceUSD": 30.0,
+          "callFeeBps": 0,
+          "cooldownSec": 3600,
+          "minPendingRewardTokens": 0.001
+        },
+        {
+          "name": "Camelot_xGRAIL",
+          "address": "0x3CAaE25Ee616f2C8E13C74dA0813402eae3F496b",
+          "abi": "abi/camelot_xgrail.json",
+          "type": "compound",
+          "enabled": false,
+          "_note": "Camelot xGRAIL dividend contract",
+          "_verify": "https://arbiscan.io/address/0x3CAaE25Ee616f2C8E13C74dA0813402eae3F496b#code",
+          "read": {
+            "pendingRewards": "dividendsOf"
+          },
+          "write": {
+            "exec": "harvestAllDividends"
+          },
+          "params": [],
+          "rewardToken": "0x912CE59144191C1204E64559FE8253a0e49E6548",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "ARB",
+          "rewardPriceUSD": 0.80,
+          "callFeeBps": 0,
+          "cooldownSec": 86400,
+          "minPendingRewardTokens": 1.0
+        },
+        {
+          "name": "Pendle_MarketETH",
+          "address": "0x08a152834de126d2ef83D612ff36e4523FD0017F",
+          "abi": "abi/pendle_market.json",
+          "type": "twap",
+          "enabled": false,
+          "_note": "Pendle PT-rsETH market - needs regular updates",
+          "_verify": "https://arbiscan.io/address/0x08a152834de126d2ef83D612ff36e4523FD0017F#code",
+          "read": {
+            "lastUpdate": "lastUpdate"
+          },
+          "write": {
+            "exec": "updateImpliedRate"
+          },
+          "params": [],
+          "fixedRewardUSD": 0.10,
+          "intervalSec": 3600,
+          "rewardToken": "0x0000000000000000000000000000000000000000",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "ETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 0,
+          "cooldownSec": 3600,
+          "minPendingRewardTokens": 0
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "timestamp": "2025-09-04T03:44:23.600890",
+  "vaults": [
+    {
+      "name": "Beefy_mim-arb-usdc",
+      "address": "0x88cD2e60A549525e13bE59daED9E2F8eBb74174a",
+      "abi": "abi/beefy_vault.json",
+      "type": "harvest",
+      "read": {
+        "pendingRewards": "balance",
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "params": [],
+      "rewardToken": "0x88cD2e60A549525e13bE59daED9E2F8eBb74174a",
+      "rewardTokenDecimals": 18,
+      "rewardPriceUSD": 1.0,
+      "callFeeBps": 0,
+      "cooldownSec": 3600,
+      "minPendingRewardTokens": "auto",
+      "tvl": 5301937.386818352,
+      "apy": 0.10319631923202777,
+      "enabled": false,
+      "_note": "MIM-USDC - TVL: $5,301,937",
+      "_verify": "https://arbiscan.io/address/0x88cD2e60A549525e13bE59daED9E2F8eBb74174a#code"
+    },
+    {
+      "name": "Beefy_balancerv3-waarbusdc",
+      "address": "0x14B85C31975b4f400dDbb6313957A79e0387f1c6",
+      "abi": "abi/beefy_vault.json",
+      "type": "harvest",
+      "read": {
+        "pendingRewards": "balance",
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "params": [],
+      "rewardToken": "0x14B85C31975b4f400dDbb6313957A79e0387f1c6",
+      "rewardTokenDecimals": 18,
+      "rewardPriceUSD": 1.0,
+      "callFeeBps": 0,
+      "cooldownSec": 3600,
+      "minPendingRewardTokens": "auto",
+      "tvl": 3664584.477276182,
+      "apy": 0.08051350732625995,
+      "enabled": false,
+      "_note": "USDC/USDT/GHO V3 - TVL: $3,664,584",
+      "_verify": "https://arbiscan.io/address/0x14B85C31975b4f400dDbb6313957A79e0387f1c6#code"
+    },
+    {
+      "name": "Beefy_uniswap-cow-arb-wbtc",
+      "address": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+      "abi": "abi/beefy_vault.json",
+      "type": "harvest",
+      "read": {
+        "pendingRewards": "balance",
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "params": [],
+      "rewardToken": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+      "rewardTokenDecimals": 18,
+      "rewardPriceUSD": 1.0,
+      "callFeeBps": 0,
+      "cooldownSec": 3600,
+      "minPendingRewardTokens": "auto",
+      "tvl": 3383408.1641211715,
+      "apy": 0.01104774023808508,
+      "enabled": false,
+      "_note": "tBTC-WBTC - TVL: $3,383,408",
+      "_verify": "https://arbiscan.io/address/0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800#code"
+    }
+  ],
+  "summary": {
+    "total_vaults": 57,
+    "total_tvl": 35599864.22642504,
+    "avg_apy": 0.09518929917644978
+  }
+}

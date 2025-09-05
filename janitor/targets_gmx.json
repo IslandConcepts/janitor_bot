@@ -1,0 +1,64 @@
+{
+  "chains": {
+    "arbitrum": {
+      "chainId": 42161,
+      "rpc": ["ARBITRUM_RPC_1", "ARBITRUM_RPC_2"],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": { 
+        "harvest": 900000,
+        "twap": 300000,
+        "compound": 800000
+      },
+      "maxBaseFeeGwei": "MAX_BASE_FEE_GWEI",
+      "fromEnvKey": "ARBITRUM_FROM_ADDRESS",
+      "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "GMX_RewardRouterV2",
+          "address": "0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1",
+          "abi": "abi/gmx_reward_router.json",
+          "type": "compound",
+          "read": {
+            "pendingRewards": "claimableRewards"
+          },
+          "write": {
+            "exec": "compound"
+          },
+          "params": [],
+          "rewardToken": "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "GMX",
+          "rewardPriceUSD": 30.0,
+          "callFeeBps": 0,
+          "cooldownSec": 3600,
+          "minPendingRewardTokens": 0.01,
+          "enabled": false,
+          "_note": "GMX Reward Router - needs verification"
+        },
+        {
+          "name": "Silo_USDC_Market",
+          "address": "0x0992B0362C02dfEC7eeC1a1b8fCE86a3F3c202A9",
+          "abi": "abi/silo_market.json",
+          "type": "harvest",
+          "read": {
+            "pendingRewards": "getPendingRewards"
+          },
+          "write": {
+            "exec": "accrueInterest"
+          },
+          "params": [],
+          "rewardToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+          "rewardTokenDecimals": 6,
+          "rewardTokenSymbol": "USDC",
+          "rewardPriceUSD": 1.0,
+          "callFeeBps": 10,
+          "cooldownSec": 3600,
+          "minPendingRewardTokens": 10,
+          "enabled": false,
+          "_note": "Silo Finance USDC market - needs verification"
+        }
+      ]
+    }
+  }
+}

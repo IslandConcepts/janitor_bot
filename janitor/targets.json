@@ -15,65 +15,79 @@
       "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
       "targets": [
         {
-          "name": "BeefyVault-USDC",
-          "address": "0x0000000000000000000000000000000000000001",
-          "abi": "abi/vault_generic.json",
+          "name": "Beefy_MIM_USDC",
+          "address": "0xE1fF230cFe84d3Aa6c6C821b499B620D17F45174",
+          "abi": "abi/beefy_strategy.json",
           "type": "harvest",
-          "read": { 
-            "pendingRewards": "pendingRewards",
+          "enabled": true,
+          "_note": "Beefy MIM-USDC Strategy - $5.3M TVL, harvested daily",
+          "_verify": "https://arbiscan.io/address/0xE1fF230cFe84d3Aa6c6C821b499B620D17F45174#code",
+          "_vault": "0x88cD2e60A549525e13bE59daED9E2F8eBb74174a",
+          "read": {
             "lastHarvest": "lastHarvest"
           },
-          "write": { 
-            "exec": "harvest" 
+          "write": {
+            "exec": "harvest"
           },
-          "params": [],
-          "rewardToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
-          "rewardTokenDecimals": 6,
-          "rewardTokenSymbol": "USDC",
-          "rewardPriceUSD": 1.0,
-          "callFeeBps": 50,
-          "cooldownSec": 900,
-          "minPendingRewardTokens": 10,
-          "enabled": true
-        },
-        {
-          "name": "YearnVault-ETH",
-          "address": "0x0000000000000000000000000000000000000002",
-          "abi": "abi/vault_generic.json",
-          "type": "harvest",
-          "read": { 
-            "pendingRewards": "pendingHarvest",
-            "lastHarvest": "lastHarvestTime"
-          },
-          "write": { 
-            "exec": "harvest" 
-          },
-          "params": [],
+          "params": ["0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"],
           "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
           "rewardTokenDecimals": 18,
           "rewardTokenSymbol": "WETH",
           "rewardPriceUSD": 2500.0,
-          "callFeeBps": 30,
-          "cooldownSec": 600,
-          "minPendingRewardTokens": 0.001,
-          "enabled": true
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
         },
         {
-          "name": "GMX-PriceOracle",
-          "address": "0x0000000000000000000000000000000000000003",
-          "abi": "abi/oracle_updater.json",
-          "type": "twap",
-          "read": { 
-            "lastUpdate": "lastUpdateTime",
-            "updateInterval": "updateInterval"
+          "name": "Beefy_USDC_USDT_GHO",
+          "address": "0xCcA14Cac1aFD72bc6fb964850936B7a51AEa1E24",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy USDC/USDT/GHO Strategy - $3.6M TVL, harvested daily",
+          "_verify": "https://arbiscan.io/address/0xCcA14Cac1aFD72bc6fb964850936B7a51AEa1E24#code",
+          "_vault": "0x14B85C31975b4f400dDbb6313957A79e0387f1c6",
+          "read": {
+            "lastHarvest": "lastHarvest"
           },
-          "write": { 
-            "exec": "updatePrice" 
+          "write": {
+            "exec": "harvest"
           },
-          "params": [],
-          "fixedRewardUSD": 0.35,
-          "intervalSec": 300,
-          "enabled": true
+          "params": ["0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
+        },
+        {
+          "name": "Beefy_tBTC_WBTC",
+          "address": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy tBTC-WBTC Strategy - $3.3M TVL - READY NOW! Uses harvest(address)",
+          "_verify": "https://arbiscan.io/address/0xa2172783Eafd97FBF25bffFAFda3aD03B5115613#code",
+          "_vault": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": ["0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
         }
       ]
     }

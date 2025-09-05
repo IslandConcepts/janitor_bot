@@ -104,8 +104,13 @@ class TransactionBuilder:
         # Sign transaction
         signed_tx = account.sign_transaction(transaction)
         
+        # Handle different web3.py versions (rawTransaction vs raw_transaction)
+        raw_tx = getattr(signed_tx, 'rawTransaction', None) or getattr(signed_tx, 'raw_transaction', None)
+        if not raw_tx:
+            raise ValueError("Cannot find raw transaction attribute in SignedTransaction object")
+        
         # Send transaction
-        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        tx_hash = w3.eth.send_raw_transaction(raw_tx)
         
         logger.info(f"Transaction sent: {tx_hash.hex()}")
         
@@ -162,8 +167,13 @@ def execute_janitor_transaction(
         params = target.get('params', [])
         call = contract.functions[exec_func](*params)
         
+        # Get from address
+        from_address = chain_config.get('from') or chain_config.get('fromAddress')
+        if not from_address:
+            raise ValueError(f"No 'from' address in chain config")
+        
         # Estimate gas
-        gas_estimate = call.estimate_gas({'from': chain_config['from']})
+        gas_estimate = call.estimate_gas({'from': from_address})
         gas_limit = int(gas_estimate * 1.2)  # Add 20% buffer
         
         # Build transaction
@@ -192,7 +202,12 @@ def execute_janitor_transaction(
             result['status'] = 'success' if receipt['status'] == 1 else 'failed'
         
     except Exception as e:
-        logger.error(f"Transaction execution error: {e}")
+        import traceback
+        logger.error(f"Transaction execution error: {e}", exc_info=True)
+        print(f"  ❌ TX Error: {e}")
+        print(f"  📋 Target: {target.get('name')}")
+        print(f"  📋 Params: {target.get('params')}")
+        traceback.print_exc()
         result['error'] = str(e)
     
     return result

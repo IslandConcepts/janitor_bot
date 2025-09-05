@@ -69,10 +69,31 @@ class Database:
                 )
             ''')
             
+            # Create profit reconciliation table
+            conn.execute('''
+                CREATE TABLE IF NOT EXISTS profit_reconciliation (
+                    tx_hash TEXT PRIMARY KEY,
+                    timestamp TEXT NOT NULL,
+                    estimated_reward_usd REAL,
+                    estimated_gas_usd REAL,
+                    estimated_net_usd REAL,
+                    actual_reward_usd REAL,
+                    actual_gas_usd REAL,
+                    actual_net_usd REAL,
+                    variance_reward_usd REAL,
+                    variance_gas_usd REAL,
+                    variance_net_usd REAL,
+                    variance_reward_pct REAL,
+                    variance_gas_pct REAL,
+                    actual_rewards_json TEXT
+                )
+            ''')
+            
             # Create indexes
             conn.execute('CREATE INDEX IF NOT EXISTS idx_runs_timestamp ON runs(timestamp)')
             conn.execute('CREATE INDEX IF NOT EXISTS idx_runs_target ON runs(target)')
             conn.execute('CREATE INDEX IF NOT EXISTS idx_failures_target ON failures(target)')
+            conn.execute('CREATE INDEX IF NOT EXISTS idx_recon_timestamp ON profit_reconciliation(timestamp)')
     
     def log_run(
         self,

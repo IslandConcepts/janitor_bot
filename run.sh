@@ -26,7 +26,7 @@ mkdir -p data
 case "$1" in
     start)
         echo -e "${GREEN}Starting janitor bot...${NC}"
-        python -m janitor.janitor
+        python3 -m janitor.janitor
         ;;
     
     docker)
@@ -46,12 +46,12 @@ case "$1" in
     
     metrics)
         echo -e "${GREEN}Starting metrics server...${NC}"
-        python -m janitor.metrics
+        python3 -m janitor.metrics
         ;;
     
     pnl)
         echo -e "${GREEN}Fetching P&L report...${NC}"
-        curl -s http://localhost:8000/metrics | python -m json.tool
+        curl -s http://localhost:8000/metrics | python3 -m json.tool
         ;;
     
     install)
@@ -62,23 +62,23 @@ case "$1" in
     
     test)
         echo -e "${GREEN}Running in test mode...${NC}"
-        ENV=test LOG_LEVEL=DEBUG python -m janitor.janitor
+        ENV=test LOG_LEVEL=DEBUG python3 -m janitor.janitor
         ;;
     
     dashboard)
         echo -e "${GREEN}Starting terminal dashboard...${NC}"
-        python -m janitor.dashboard
+        python3 -m janitor.dashboard
         ;;
     
     log-viewer)
         echo -e "${GREEN}Starting log viewer...${NC}"
         shift
-        python -m janitor.log_viewer "$@"
+        python3 -m janitor.log_viewer "$@"
         ;;
     
     log-tail)
         echo -e "${GREEN}Tailing logs...${NC}"
-        python -m janitor.log_viewer --tail --follow
+        python3 -m janitor.log_viewer --tail --follow
         ;;
     
     *)

@@ -2,7 +2,16 @@ import json
 import logging
 from typing import Optional, List, Dict, Any
 from web3 import Web3
-from web3.providers import HTTPProvider, WebsocketProvider
+from web3.providers import HTTPProvider
+# WebsocketProvider is optional, handle different web3 versions
+WebsocketProvider = None
+try:
+    from web3.providers import WebsocketProvider
+except ImportError:
+    try:
+        from web3.providers.websocket import WebsocketProvider
+    except ImportError:
+        pass  # WebSocket support not available
 from tenacity import retry, stop_after_attempt, wait_exponential
 
 logger = logging.getLogger(__name__)
@@ -22,7 +31,7 @@ class RPCManager:
         # Try each RPC endpoint
         for i, url in enumerate(rpc_urls):
             try:
-                if url.startswith('ws://') or url.startswith('wss://'):
+                if (url.startswith('ws://') or url.startswith('wss://')) and WebsocketProvider:
                     provider = WebsocketProvider(url, websocket_timeout=20)
                 else:
                     provider = HTTPProvider(url, request_kwargs={'timeout': 20})

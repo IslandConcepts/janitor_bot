@@ -12,11 +12,12 @@ from janitor.tx import TransactionBuilder, execute_janitor_transaction
 from janitor.storage import Database
 from janitor.utils import calculate_time_until
 from janitor.logging_config import get_logger, setup_logging
+from janitor.profit_tracker import ProfitTracker, ProfitReconciler
 
 logger = get_logger(__name__)
 
 class JanitorBot:
-    """Main janitor bot orchestrator"
+    """Main janitor bot orchestrator"""
     
     def __init__(self, config_path: str = "janitor/targets.json"):
         self.config = load_config(config_path)
@@ -57,9 +58,13 @@ class JanitorBot:
             state = {}
             
             if target['type'] == 'harvest':
-                # Read pending rewards
-                func_name = target['read']['pendingRewards']
-                state['pending'] = contract.functions[func_name]().call()
+                # Read last harvest time for cooldown check
+                if 'lastHarvest' in target['read']:
+                    func_name = target['read']['lastHarvest']
+                    state['lastHarvest'] = contract.functions[func_name]().call()
+                elif 'pendingRewards' in target['read']:
+                    func_name = target['read']['pendingRewards']
+                    state['pending'] = contract.functions[func_name]().call()
                 
             elif target['type'] == 'twap':
                 # Read last update time
@@ -100,12 +105,27 @@ class JanitorBot:
         
         # Check target-specific conditions
         if target['type'] == 'harvest':
-            pending = state.get('pending', 0)
-            min_threshold = get_min_pending_threshold(target)
-            if pending < min_threshold:
-                logger.debug(f"{target['name']}: pending rewards below threshold",
-                           target=target['name'], pending=pending, threshold=min_threshold)
-                return False
+            # If we have lastHarvest, check cooldown
+            if 'lastHarvest' in state:
+                last_harvest = state['lastHarvest']
+                cooldown = target.get('cooldownSec', 0)
+                if (now - last_harvest) < cooldown:
+                    time_remaining = cooldown - (now - last_harvest)
+                    logger.debug(f"{target['name']}: harvest cooldown active ({time_remaining}s remaining)",
+                               target=target['name'], cooldown_remaining=time_remaining)
+                    return False
+                else:
+                    logger.info(f"{target['name']}: harvest cooldown expired, ready to harvest!",
+                               target=target['name'], hours_since=((now - last_harvest) / 3600))
+                    return True
+            # Otherwise check pending rewards
+            elif 'pending' in state:
+                pending = state.get('pending', 0)
+                min_threshold = get_min_pending_threshold(target)
+                if pending < min_threshold:
+                    logger.debug(f"{target['name']}: pending rewards below threshold",
+                               target=target['name'], pending=pending, threshold=min_threshold)
+                    return False
                 
         elif target['type'] == 'twap':
             last_update = state.get('lastUpdate', 0)
@@ -123,6 +143,15 @@ class JanitorBot:
         try:
             # Check if target is paused
             if self.db.is_paused(target['name']):
+                # Get pause end time for display
+                with self.db.get_conn() as conn:
+                    result = conn.execute(
+                        'SELECT paused_until FROM state WHERE target = ?',
+                        (target['name'],)
+                    ).fetchone()
+                    if result and result['paused_until']:
+                        remaining = int(result['paused_until'] - time.time())
+                        print(f"  ⏸️  {target['name']}: Paused for {remaining}s")
                 logger.debug(f"{target['name']}: currently paused", 
                            target=target['name'], chain=chain_name)
                 return
@@ -141,17 +170,25 @@ class JanitorBot:
             # Read on-chain state
             state = self.read_target_state(w3, target)
             if not state:
+                print(f"  ❌ {target['name']}: No state data")
                 return
+            
+            print(f"  📊 {target['name']}: State = {state}")
             
             # Check if should execute
             if not self.should_execute_target(target, state):
+                print(f"  ⏰ {target['name']}: Not ready (check conditions)")
                 return
+            
+            print(f"  ✅ {target['name']}: Passed cooldown check!")
             
             # Estimate profit
             profit_estimate = estimate_profit_usd(chain_config, target, state, base_fee_gwei)
+            print(f"  💰 {target['name']}: Profit estimate = {profit_estimate}")
             
             # Check profit gate
             if not passes_profit_gate(profit_estimate, self.config):
+                print(f"  ❌ {target['name']}: Failed profit gate - expected: ${profit_estimate.get('reward_usd', 0):.2f}, gas: ${profit_estimate.get('gas_usd', 0):.2f}")
                 logger.debug(f"{target['name']}: profit gate not met "
                            f"(net=${profit_estimate['net_usd']:.4f}, "
                            f"reward/gas={profit_estimate['reward_usd']/max(profit_estimate['gas_usd'], 0.001):.2f}x)",
@@ -168,9 +205,56 @@ class JanitorBot:
                        expected_net_usd=profit_estimate['net_usd'],
                        gas_price=base_fee_gwei)
             
-            result = execute_janitor_transaction(w3, chain_config, target, self.tx_builder)
+            print(f"  🚀 {target['name']}: Attempting harvest...")
+            
+            try:
+                result = execute_janitor_transaction(w3, chain_config, target, self.tx_builder)
+            except Exception as tx_error:
+                print(f"  ❌ {target['name']}: Transaction failed - {tx_error}")
+                logger.error(f"Transaction failed for {target['name']}: {tx_error}", exc_info=True)
+                # Pause for 15 minutes to avoid repeated failures
+                self.db.pause_target(target['name'], 15)
+                self.db.log_failure(chain_name, target['name'], str(tx_error))
+                print(f"  ⏸️  {target['name']}: Paused for 15 minutes")
+                return
             
             if result['status'] == 'success':
+                # Analyze actual receipt for rewards
+                try:
+                    tx_receipt = w3.eth.get_transaction_receipt(result['tx_hash'])
+                    profit_tracker = ProfitTracker(w3)
+                    actual_rewards = profit_tracker.analyze_harvest_receipt(
+                        tx_receipt, 
+                        chain_config.get('from') or chain_config.get('fromAddress')
+                    )
+                    
+                    # Reconcile estimated vs actual
+                    reconciler = ProfitReconciler(self.db, profit_tracker)
+                    reconciliation = reconciler.reconcile_transaction(
+                        tx_hash=result['tx_hash'],
+                        estimated_reward_usd=profit_estimate['reward_usd'],
+                        estimated_gas_usd=profit_estimate['gas_usd'],
+                        actual_receipt=actual_rewards
+                    )
+                    
+                    # Save reconciliation
+                    reconciler.save_reconciliation(reconciliation)
+                    
+                    # Log with actual values
+                    actual_net = reconciliation['actual']['net_usd']
+                    print(f"  💰 {target['name']}: Harvest complete!")
+                    print(f"     Estimated: ${profit_estimate['reward_usd']:.2f} reward - ${profit_estimate['gas_usd']:.2f} gas = ${profit_estimate['net_usd']:.2f} net")
+                    print(f"     Actual: {len(actual_rewards['rewards'])} rewards received, gas: ${reconciliation['actual']['gas_usd']:.4f}")
+                    
+                    if actual_rewards['rewards']:
+                        print(f"     Rewards received:")
+                        for reward in actual_rewards['rewards']:
+                            print(f"       - {reward['amount']:.6f} {reward['symbol']}")
+                    
+                except Exception as e:
+                    logger.warning(f"Could not analyze receipt: {e}")
+                    actual_net = profit_estimate['reward_usd'] - result['gas_cost_usd']
+                
                 # Log successful run
                 self.db.log_run(
                     chain=chain_name,
@@ -200,9 +284,10 @@ class JanitorBot:
                            profit_usd=net_profit,
                            gas_used=result['gas_used'])
                 
-                # Log to transaction logger
-                logger.log_transaction(chain_name, target['name'], result['tx_hash'],
-                                     result['gas_used'], net_profit, 'success')
+                # Log to transaction logger if available
+                if hasattr(logger, 'log_transaction'):
+                    logger.log_transaction(chain_name, target['name'], result['tx_hash'],
+                                         result['gas_used'], net_profit, 'success')
             else:
                 # Log failure
                 self.db.log_failure(
@@ -234,6 +319,7 @@ class JanitorBot:
         logger.info("Starting janitor loop", 
                    loop_interval=5,
                    chains=list(self.config['chains'].keys()))
+        print(f"🔄 Bot is running! Checking {len(self.config['chains'])} chain(s)...")
         loop_interval = 5  # seconds
         loop_count = 0
         
@@ -253,14 +339,33 @@ class JanitorBot:
                 # Process each chain
                 for chain_name, chain_config in self.config['chains'].items():
                     # Process each target
-                    for target in chain_config['targets']:
+                    targets = chain_config.get('targets', [])
+                    if loop_count == 1:
+                        print(f"  Found {len(targets)} targets to check")
+                    
+                    for idx, target in enumerate(targets):
+                        if loop_count == 1:  # First loop only
+                            print(f"  📍 [{idx+1}/{len(targets)}] Checking {target['name']}...")
+                        
                         if not validate_target(target):
+                            if loop_count == 1:
+                                print(f"    ❌ Invalid target config")
                             continue
                         
                         if not target.get('enabled', True):
+                            if loop_count == 1:
+                                print(f"    ❌ Target disabled")
                             continue
                         
-                        self.process_target(chain_name, chain_config, target)
+                        # Wrap each target to prevent loop crashes
+                        try:
+                            self.process_target(chain_name, chain_config, target)
+                        except Exception as e:
+                            print(f"  💥 {target['name']}: Unhandled error - {e}")
+                            logger.error(f"Unhandled error in {target['name']}: {e}", exc_info=True)
+                            self.db.log_failure(chain_name, target['name'], f"unhandled: {e}")
+                            # Don't pause on unhandled errors, just continue
+                            continue
                 
                 # Log loop performance
                 loop_duration = (time.time() - loop_start) * 1000
@@ -286,11 +391,17 @@ class JanitorBot:
         try:
             # Log daily P&L at startup
             pnl = self.db.get_daily_pnl()
-            logger.info(f"Today's P&L: net=${pnl['total_net_usd']:.2f}, "
-                       f"runs={pnl['total_runs']}, failures={pnl['total_failures']}",
-                       daily_net_usd=pnl['total_net_usd'],
-                       daily_runs=pnl['total_runs'],
-                       daily_failures=pnl['total_failures'])
+            net_usd = pnl.get('total_net_usd', 0) or 0
+            total_runs = pnl.get('total_runs', 0) or 0
+            total_failures = pnl.get('total_failures', 0) or 0
+            
+            logger.info(f"Today's P&L: net=${net_usd:.2f}, "
+                       f"runs={total_runs}, failures={total_failures}",
+                       daily_net_usd=net_usd,
+                       daily_runs=total_runs,
+                       daily_failures=total_failures)
+            
+            logger.info("Starting main loop...")
             
             # Start main loop
             self.run_loop()

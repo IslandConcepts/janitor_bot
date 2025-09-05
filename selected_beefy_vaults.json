@@ -1,0 +1,51 @@
+[
+  {
+    "id": "mim-arb-usdc",
+    "name": "MIM-USDC",
+    "vault_address": "0x88cD2e60A549525e13bE59daED9E2F8eBb74174a",
+    "strategy": "0xE1fF230cFe84d3Aa6c6C821b499B620D17F45174",
+    "tvl": 5301937.386818352,
+    "apy": 0.10319631923202777,
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0,
+    "token": "MagicLP",
+    "token_decimals": 18,
+    "assets": [
+      "MIM",
+      "USDC"
+    ]
+  },
+  {
+    "id": "balancerv3-arbitrum-waarbusdcn-waarbusdt-waarbgho",
+    "name": "USDC/USDT/GHO V3",
+    "vault_address": "0x14B85C31975b4f400dDbb6313957A79e0387f1c6",
+    "strategy": "0xCcA14Cac1aFD72bc6fb964850936B7a51AEa1E24",
+    "tvl": 3664584.477276182,
+    "apy": 0.08051350732625995,
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0,
+    "token": "USDC/USDT/GHO V3",
+    "token_decimals": 18,
+    "assets": [
+      "waArbUSDCn",
+      "waArbUSDT",
+      "waArbGHO"
+    ]
+  },
+  {
+    "id": "uniswap-cow-arb-wbtc-tbtc-vault",
+    "name": "tBTC-WBTC",
+    "vault_address": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+    "strategy": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+    "tvl": 3383408.1641211715,
+    "apy": 0.01104774023808508,
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0,
+    "token": "tBTC-WBTC",
+    "token_decimals": 18,
+    "assets": [
+      "tBTC",
+      "WBTC"
+    ]
+  }
+]

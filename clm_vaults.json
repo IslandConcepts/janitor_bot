@@ -1,0 +1,32 @@
+[
+  {
+    "id": "camelot-wsteth-weth",
+    "name": "wstETH-WETH",
+    "address": "0xc4AE801d239da28A9108a5E6caD9F5893Ad93CB2",
+    "strategy": null,
+    "tvl": 71963.80510965534,
+    "type": "cowcentrated",
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0
+  },
+  {
+    "id": "uniswap-cow-arb-weth-reth",
+    "name": "rETH-WETH",
+    "address": "0xB79D17BE1bd9544e0005FA0F9033f8f78CE06D4c",
+    "strategy": null,
+    "tvl": 20490.211521554695,
+    "type": "cowcentrated",
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0
+  },
+  {
+    "id": "camelot-gns-weth",
+    "name": "GNS-WETH",
+    "address": "0xbdFf136395A96f2c09CBC3FbDf8F50FF9C42c21E",
+    "strategy": null,
+    "tvl": 15119.822054998998,
+    "type": "cowcentrated",
+    "call_fee": 9.999999999999998e-05,
+    "call_fee_bps": 0
+  }
+]

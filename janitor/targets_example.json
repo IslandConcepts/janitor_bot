@@ -1,0 +1,81 @@
+{
+  "chains": {
+    "arbitrum": {
+      "chainId": 42161,
+      "rpc": ["ARBITRUM_RPC_1", "ARBITRUM_RPC_2"],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": { 
+        "harvest": 900000,
+        "twap": 300000,
+        "compound": 800000
+      },
+      "maxBaseFeeGwei": "MAX_BASE_FEE_GWEI",
+      "fromEnvKey": "ARBITRUM_FROM_ADDRESS",
+      "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "BeefyVault-USDC",
+          "address": "0x0000000000000000000000000000000000000001",
+          "abi": "abi/vault_generic.json",
+          "type": "harvest",
+          "read": { 
+            "pendingRewards": "pendingRewards",
+            "lastHarvest": "lastHarvest"
+          },
+          "write": { 
+            "exec": "harvest" 
+          },
+          "params": [],
+          "rewardToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+          "rewardTokenDecimals": 6,
+          "rewardTokenSymbol": "USDC",
+          "rewardPriceUSD": 1.0,
+          "callFeeBps": 50,
+          "cooldownSec": 900,
+          "minPendingRewardTokens": 10,
+          "enabled": true
+        },
+        {
+          "name": "YearnVault-ETH",
+          "address": "0x0000000000000000000000000000000000000002",
+          "abi": "abi/vault_generic.json",
+          "type": "harvest",
+          "read": { 
+            "pendingRewards": "pendingHarvest",
+            "lastHarvest": "lastHarvestTime"
+          },
+          "write": { 
+            "exec": "harvest" 
+          },
+          "params": [],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 30,
+          "cooldownSec": 600,
+          "minPendingRewardTokens": 0.001,
+          "enabled": true
+        },
+        {
+          "name": "GMX-PriceOracle",
+          "address": "0x0000000000000000000000000000000000000003",
+          "abi": "abi/oracle_updater.json",
+          "type": "twap",
+          "read": { 
+            "lastUpdate": "lastUpdateTime",
+            "updateInterval": "updateInterval"
+          },
+          "write": { 
+            "exec": "updatePrice" 
+          },
+          "params": [],
+          "fixedRewardUSD": 0.35,
+          "intervalSec": 300,
+          "enabled": true
+        }
+      ]
+    }
+  }
+}

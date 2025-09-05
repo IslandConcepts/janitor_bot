@@ -49,6 +49,12 @@ def estimate_profit_usd(
 
 def calculate_harvest_reward(target: Dict[str, Any], onchain_state: Dict[str, Any]) -> float:
     """Calculate expected reward from harvest operation"""
+    
+    # If we have a fixed reward estimate, use it
+    if 'fixedRewardUSD' in target:
+        return target['fixedRewardUSD']
+    
+    # Otherwise try to calculate from pending rewards
     pending = onchain_state.get('pending', 0)
     
     if pending == 0:

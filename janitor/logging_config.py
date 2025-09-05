@@ -230,7 +230,10 @@ class JanitorLogger:
         if details:
             perf_data.update(details)
         
-        self.perf_logger.debug(f"Performance: {operation}", extra=perf_data)
+        if hasattr(self, 'perf_logger'):
+            self.perf_logger.debug(f"Performance: {operation}", extra=perf_data)
+        else:
+            self.logger.debug(f"Performance: {operation} - {duration_ms:.2f}ms", extra=perf_data)
     
     def debug(self, msg: str, **kwargs):
         self.logger.debug(msg, extra=kwargs)

@@ -1,0 +1,43 @@
+{
+  "chains": {
+    "arbitrum": {
+      "chainId": 42161,
+      "rpc": ["ARBITRUM_RPC_1", "ARBITRUM_RPC_2"],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": { 
+        "harvest": 900000,
+        "twap": 300000,
+        "compound": 800000
+      },
+      "maxBaseFeeGwei": "MAX_BASE_FEE_GWEI",
+      "fromEnvKey": "ARBITRUM_FROM_ADDRESS",
+      "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "TestMode-DummyVault",
+          "address": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+          "abi": "abi/vault_generic.json",
+          "type": "harvest",
+          "read": { 
+            "pendingRewards": "balanceOf",
+            "lastHarvest": "totalSupply"
+          },
+          "write": { 
+            "exec": "transfer" 
+          },
+          "params": ["0x0000000000000000000000000000000000000000", "0"],
+          "rewardToken": "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+          "rewardTokenDecimals": 6,
+          "rewardTokenSymbol": "USDC",
+          "rewardPriceUSD": 1.0,
+          "callFeeBps": 50,
+          "cooldownSec": 86400,
+          "minPendingRewardTokens": 1000000,
+          "enabled": false,
+          "_note": "This is USDC contract used for testing read functions only"
+        }
+      ]
+    }
+  }
+}
