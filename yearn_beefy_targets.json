@@ -1,0 +1,87 @@
+{
+  "yearn_addresses": [
+    {
+      "address": "0x6FAF8b7fFeE3306EfcFc2BA9Fec912b4d49834C1",
+      "chain": "arbitrum",
+      "protocol": "yearn",
+      "needs_verification": true
+    },
+    {
+      "address": "0x7DEB119b92b76f78C212bc54FBBb34CEA75f4d4A",
+      "chain": "arbitrum",
+      "protocol": "yearn",
+      "needs_verification": true
+    },
+    {
+      "address": "0xc0ba9bfED28aB46Da48d2B69316A3838698EF3f5",
+      "chain": "arbitrum",
+      "protocol": "yearn",
+      "needs_verification": true
+    }
+  ],
+  "beefy_treasuries": [
+    {
+      "address": "0x3f5eddad52C665A4AA011cd11A21E1d5107d7862",
+      "chain": "arbitrum",
+      "type": "treasury",
+      "protocol": "beefy"
+    },
+    {
+      "address": "0x1A07DceEfeEbBA3D1873e2B92BeF190d2f11C3cB",
+      "chain": "base",
+      "type": "treasury",
+      "protocol": "beefy"
+    }
+  ],
+  "suggested_targets": [
+    {
+      "name": "Yearn_Strategy_0x6FAF8b",
+      "address": "0x6FAF8b7fFeE3306EfcFc2BA9Fec912b4d49834C1",
+      "abi": "abi/yearn_v3_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.5,
+      "read": {},
+      "write": {
+        "exec": "report"
+      },
+      "_note": "Yearn v3 strategy - needs function verification",
+      "_verify_url": "https://arbiscan.io/address/0x6FAF8b7fFeE3306EfcFc2BA9Fec912b4d49834C1#code"
+    },
+    {
+      "name": "Yearn_Strategy_0x7DEB11",
+      "address": "0x7DEB119b92b76f78C212bc54FBBb34CEA75f4d4A",
+      "abi": "abi/yearn_v3_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.5,
+      "read": {},
+      "write": {
+        "exec": "report"
+      },
+      "_note": "Yearn v3 strategy - needs function verification",
+      "_verify_url": "https://arbiscan.io/address/0x7DEB119b92b76f78C212bc54FBBb34CEA75f4d4A#code"
+    },
+    {
+      "name": "Yearn_Strategy_0xc0ba9b",
+      "address": "0xc0ba9bfED28aB46Da48d2B69316A3838698EF3f5",
+      "abi": "abi/yearn_v3_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.5,
+      "read": {},
+      "write": {
+        "exec": "report"
+      },
+      "_note": "Yearn v3 strategy - needs function verification",
+      "_verify_url": "https://arbiscan.io/address/0xc0ba9bfED28aB46Da48d2B69316A3838698EF3f5#code"
+    }
+  ],
+  "verification_needed": true
+}

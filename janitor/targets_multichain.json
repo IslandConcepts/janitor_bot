@@ -1,0 +1,113 @@
+{
+  "chains": {
+    "arbitrum": {
+      "chainId": 42161,
+      "rpc": [
+        "ARBITRUM_RPC_1"
+      ],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": {
+        "harvest": 500000,
+        "compound": 400000
+      },
+      "maxBaseFeeGwei": 0.2,
+      "fromEnvKey": "ARBITRUM_FROM_ADDRESS",
+      "pkEnvKey": "ARBITRUM_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "Beefy_MIM_USDC",
+          "address": "0xD945e7937066f3A8b87460301666c5287f5315dD",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "params": [
+            "0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"
+          ],
+          "cooldownSec": 43200,
+          "fixedRewardUSD": 0.5,
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          }
+        },
+        {
+          "name": "Beefy_USDC_USDT_GHO",
+          "address": "0x21d37617F19910a82C6CaeE0BD973Bf87Ce11D8e",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "params": [
+            "0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"
+          ],
+          "cooldownSec": 43200,
+          "fixedRewardUSD": 0.5,
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          }
+        },
+        {
+          "name": "Beefy_tBTC_WBTC",
+          "address": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "params": [
+            "0x00823727Ec5800ae6f5068fABAEb39608dE8bf45"
+          ],
+          "cooldownSec": 43200,
+          "fixedRewardUSD": 0.5,
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          }
+        },
+        {
+          "name": "GMX_SelfCompound",
+          "address": "0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1",
+          "abi": "abi/gmx_reward_router.json",
+          "type": "compound",
+          "enabled": true,
+          "params": [],
+          "cooldownSec": 86400,
+          "fixedRewardUSD": 0.0,
+          "read": {},
+          "write": {
+            "exec": "compound"
+          },
+          "_note": "Self-compounds your GMX staking position"
+        }
+      ]
+    },
+    "base": {
+      "chainId": 8453,
+      "rpc": [
+        "BASE_RPC_1"
+      ],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": {
+        "harvest": 500000,
+        "compound": 400000
+      },
+      "maxBaseFeeGwei": 0.1,
+      "fromEnvKey": "BASE_FROM_ADDRESS",
+      "pkEnvKey": "BASE_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "Placeholder_Base_Vault",
+          "address": "0x0000000000000000000000000000000000000000",
+          "enabled": false,
+          "_note": "To be replaced with actual Base vaults"
+        }
+      ]
+    }
+  }
+}

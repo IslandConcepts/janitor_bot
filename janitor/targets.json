@@ -88,6 +88,48 @@
           "cooldownSec": 43200,
           "minPendingRewardTokens": 0.00001,
           "fixedRewardUSD": 0.50
+        },
+        {
+          "name": "GMX_SelfCompound",
+          "address": "0xA906F338CB21815cBc4Bc87ace9e68c87eF8d8F1",
+          "abi": "abi/gmx_reward_router.json",
+          "type": "compound",
+          "enabled": false,
+          "params": [],
+          "cooldownSec": 86400,
+          "fixedRewardUSD": 0.0,
+          "skipProfitGate": true,
+          "read": {},
+          "write": {
+            "exec": "compound"
+          },
+          "_note": "Daily self-compounding of staked GMX position - no direct profit but boosts rewards"
+        },
+        {
+          "name": "CLM_USDC_DAI",
+          "address": "0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec",
+          "abi": "abi/beefy_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy CLM USDC-DAI Strategy - Confirmed working harvest()",
+          "_verify": "https://arbiscan.io/address/0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec#code",
+          "_vault": "uniswap-cow-arb-usdc-dai",
+          "_harvester": "0x03d9964f4d93a24b58c0fc3a8df3474b59ba8557",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
         }
       ]
     }

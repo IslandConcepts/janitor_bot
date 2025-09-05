@@ -73,8 +73,15 @@ class JanitorBot:
                 
             elif target['type'] == 'compound':
                 # Similar to harvest
-                func_name = target['read'].get('pendingCompound', 'pendingRewards')
-                state['pendingCompound'] = contract.functions[func_name]().call()
+                if 'pendingCompound' in target['read']:
+                    func_name = target['read']['pendingCompound']
+                    state['pendingCompound'] = contract.functions[func_name]().call()
+                elif 'pendingRewards' in target['read']:
+                    func_name = target['read']['pendingRewards']
+                    state['pendingCompound'] = contract.functions[func_name]().call()
+                else:
+                    # No read function - compound operations may not have readable state
+                    state['readyToCompound'] = True
             
             duration_ms = (time.time() - start_time) * 1000
             logger.log_performance('read_state', duration_ms, True, 
@@ -186,8 +193,8 @@ class JanitorBot:
             profit_estimate = estimate_profit_usd(chain_config, target, state, base_fee_gwei)
             print(f"  💰 {target['name']}: Profit estimate = {profit_estimate}")
             
-            # Check profit gate
-            if not passes_profit_gate(profit_estimate, self.config):
+            # Check profit gate (skip if configured)
+            if not target.get('skipProfitGate', False) and not passes_profit_gate(profit_estimate, self.config):
                 print(f"  ❌ {target['name']}: Failed profit gate - expected: ${profit_estimate.get('reward_usd', 0):.2f}, gas: ${profit_estimate.get('gas_usd', 0):.2f}")
                 logger.debug(f"{target['name']}: profit gate not met "
                            f"(net=${profit_estimate['net_usd']:.4f}, "

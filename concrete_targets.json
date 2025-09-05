@@ -1,0 +1,45 @@
+{
+  "beefy_working": [
+    {
+      "name": "Beefy_MIM_USDC",
+      "strategy": "0xD945e7937066f3A8b87460301666c5287f5315dD",
+      "vault": "0x693B0Adf3AFA78f8CB83ca436c77207CD4EaE0ca",
+      "description": "MIM-USDC Balancer stable pool"
+    },
+    {
+      "name": "Beefy_USDC_USDT_GHO",
+      "strategy": "0x21d37617F19910a82C6CaeE0BD973Bf87Ce11D8e",
+      "vault": "0x1B3824ab1fE5ee996d59e39CE0E1236Fb5b7B5F4",
+      "description": "USDC/USDT/GHO Balancer v3 bundle"
+    },
+    {
+      "name": "Beefy_tBTC_WBTC",
+      "strategy": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+      "vault": "0x0c63BBC3712c53214b5489C68cCDC5a9e3bB4800",
+      "description": "tBTC-WBTC major pair"
+    }
+  ],
+  "beefy_clm": [],
+  "reaper": [
+    {
+      "name": "Reaper_USDC_Crypt",
+      "address": "0x0000000000000000000000000000000000000000",
+      "chain": "arbitrum",
+      "description": "USDC single-strategy Crypt with 0.45% caller reward"
+    }
+  ],
+  "yearn_v3": [
+    {
+      "name": "yvUSDC-3",
+      "address": "Check yearn.fi for Arbitrum deployments",
+      "type": "v3_vault"
+    }
+  ],
+  "balancer": [
+    {
+      "name": "Balancer_GaugeController",
+      "address": "0xC128468b7Ce63eA702C1f104D55A2566b13D3ABD",
+      "description": "Balancer gauge controller for fee distribution"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "beefy_vaults": [],
+  "aerodrome": [
+    {
+      "name": "Aerodrome_Voter",
+      "address": "0x16613524e02ad97eDfeF371bC883F2F5d6C480A5",
+      "description": "Aerodrome voter - distributes emissions"
+    },
+    {
+      "name": "Aerodrome_RewardsDistributor",
+      "address": "0x227f65131A261548b057215bB1D5Ab2997964C7d",
+      "description": "Distributes AERO rewards"
+    }
+  ],
+  "other_protocols": [
+    "Synthetix (SNX staking)",
+    "Extra Finance (leveraged yield)",
+    "Stargate (bridge liquidity)",
+    "BaseSwap (DEX)",
+    "Moonwell (lending)",
+    "Compound v3 (lending)"
+  ]
+}
