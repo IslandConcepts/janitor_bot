@@ -1,0 +1,196 @@
+{
+  "chain": "base",
+  "found": 27,
+  "targets": [
+    {
+      "name": "BASE_CLM_sushi_cow_base_weth_",
+      "address": "0xbEc422B86DE3EAD873Dd60840b6068FE8944dB41",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "sushi-cow-base-weth-usdbc",
+      "_tvl": 0,
+      "_platform": "sushi"
+    },
+    {
+      "name": "BASE_CLM_aerodrome_cow_base_w",
+      "address": "0x4c46B6d191Ae69CA9814965498c7975AEbcB0Ac7",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "aerodrome-cow-base-weth-cbltc",
+      "_tvl": 0,
+      "_platform": "aerodrome"
+    },
+    {
+      "name": "BASE_CLM_aero_cow_weth_zro",
+      "address": "0x672927AEcA0641d9e733ef90D41d0cf92c3dd9dF",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "aero-cow-weth-zro",
+      "_tvl": 0,
+      "_platform": "aerodrome"
+    },
+    {
+      "name": "BASE_CLM_aerodrome_cow_base_w",
+      "address": "0x1C0E41A1798ecf38Fc964f6A48065C973fa8C16F",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "aerodrome-cow-base-weth-usei",
+      "_tvl": 0,
+      "_platform": "aerodrome"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_cla",
+      "address": "0xac1565a7Fd8923652C2B8b49B6B2B66B3be4FCCC",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-clanker-weth",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_alb",
+      "address": "0x6926973EdD05cfDBc714F1c2A0aF0ec194f9eC9D",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-alb-weth",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_wet",
+      "address": "0xaE5b8d1e9890fedcF3ADEAe57340cD8cA8485e23",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-weth-mfer",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_hig",
+      "address": "0x16EC9E361f6b28Fb9A9CA366d2a09c82d36B369A",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-higher-weth",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_wet",
+      "address": "0x8fd707FE75a953b3dF71C2b04b2F1eb88E463c95",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-weth-pepe",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    },
+    {
+      "name": "BASE_CLM_uniswap_cow_base_sim",
+      "address": "0x80D4d770D773bA191f759503E94634a066b12d7F",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-base-simmi-weth",
+      "_tvl": 0,
+      "_platform": "uniswap"
+    }
+  ]
+}

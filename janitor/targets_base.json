@@ -1,0 +1,212 @@
+{
+  "chains": {
+    "base": {
+      "chainId": 8453,
+      "rpc": ["BASE_RPC_1", "BASE_RPC_2"],
+      "nativeSymbol": "ETH",
+      "nativeUsd": 2500.0,
+      "gasLimitCaps": { 
+        "harvest": 900000,
+        "twap": 300000,
+        "compound": 800000
+      },
+      "maxBaseFeeGwei": "MAX_BASE_FEE_GWEI",
+      "fromEnvKey": "BASE_FROM_ADDRESS",
+      "pkEnvKey": "BASE_PRIVATE_KEY",
+      "targets": [
+        {
+          "name": "BASE_CLM_WETH_USDBC",
+          "address": "0xbEc422B86DE3EAD873Dd60840b6068FE8944dB41",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Sushi CLM WETH-USDBC Strategy",
+          "_vault": "sushi-cow-base-weth-usdbc",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_WETH_CBLTC",
+          "address": "0x4c46B6d191Ae69CA9814965498c7975AEbcB0Ac7",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Aerodrome CLM WETH-cbLTC Strategy",
+          "_vault": "aerodrome-cow-base-weth-cbltc",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_WETH_ZRO",
+          "address": "0x672927AEcA0641d9e733ef90D41d0cf92c3dd9dF",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Aerodrome CLM WETH-ZRO Strategy",
+          "_vault": "aero-cow-weth-zro",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_WETH_USEI",
+          "address": "0x1C0E41A1798ecf38Fc964f6A48065C973fa8C16F",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Aerodrome CLM WETH-USEI Strategy",
+          "_vault": "aerodrome-cow-base-weth-usei",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_CLANKER_WETH",
+          "address": "0xac1565a7Fd8923652C2B8b49B6B2B66B3be4FCCC",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Uniswap CLM CLANKER-WETH Strategy",
+          "_vault": "uniswap-cow-base-clanker-weth",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_WETH_PEPE",
+          "address": "0x8fd707FE75a953b3dF71C2b04b2F1eb88E463c95",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Uniswap CLM WETH-PEPE Strategy",
+          "_vault": "uniswap-cow-base-weth-pepe",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_HIGHER_WETH",
+          "address": "0x16EC9E361f6b28Fb9A9CA366d2a09c82d36B369A",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Uniswap CLM HIGHER-WETH Strategy",
+          "_vault": "uniswap-cow-base-higher-weth",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_CLM_WETH_BRETT",
+          "address": "0xeB47c3bc2923A6bE10B4c7f662c02590652E224f",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Aerodrome CLM WETH-BRETT Strategy",
+          "_vault": "aero-cow-weth-brett",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        }
+      ]
+    }
+  }
+}
