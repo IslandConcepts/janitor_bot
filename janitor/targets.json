@@ -338,6 +338,78 @@
           "cooldownSec": 21600,
           "minPendingRewardTokens": 0.00001,
           "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "BASE_Beefy_WETH_USDC",
+          "address": "0x9bd7A4b5D5Fe8C7dd39D085279306309fA6F1a15",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy Aerodrome WETH-USDC Strategy",
+          "_vault": "aerodrome-weth-usdc",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
+        },
+        {
+          "name": "BASE_Beefy_AERO_wstETH",
+          "address": "0x68d24F7C60D316EB27e116A9910902Ff23CD8f1E",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy Aerodrome AERO-wstETH Strategy",
+          "_vault": "aerodrome-aero-wsteth",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
+        },
+        {
+          "name": "BASE_Morpho_cbBTC",
+          "address": "0xC02ceF879331834a7823f2AfAD6a1DF7d9DB6C05",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "Beefy Morpho cbBTC Strategy",
+          "_vault": "morpho-seamless-cbbtc",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x4200000000000000000000000000000000000006",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 43200,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.50
         }
       ]
     }
