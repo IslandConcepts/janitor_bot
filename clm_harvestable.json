@@ -1,0 +1,185 @@
+{
+  "found": 25,
+  "targets": [
+    {
+      "name": "CLM_pancake_cow_arb_weth_usdt",
+      "address": "0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "pancake-cow-arb-weth-usdt-500",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_zro_weth_",
+      "address": "0xb683123DC034c75ce5e7C67DC5Dac153613ac250",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-zro-weth-0.3",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_link_eth",
+      "address": "0xa84fb0A440C6073C467D52320C1Ff4fFfE02cF22",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-link-eth",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_usdc_dai",
+      "address": "0xEc50c0BDEe494e22dfb3E0C02d33f0c5163192D0",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-usdc-dai",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_link_usdt",
+      "address": "0x4BFF92a448CBb9a2B7D5AAb11f4a525D4ab8E61a",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-link-usdt",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_wbtc_link",
+      "address": "0x72eC3DaD8070D5b1fb0d14d6C255c3bA62c401c5",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-wbtc-link",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_usdc_uni",
+      "address": "0x9262D82C4B5ea5f20bF9465F4D999E6b45bc300f",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-usdc-uni",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_wbtc_tbtc",
+      "address": "0x54b5569deC8A6A8AE61A36Fd34e5c8945810db8b",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-wbtc-tbtc",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_camelot_weth_link",
+      "address": "0xE9D2aB10BD4D896b4D537cd54d8f794838131370",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "camelot-weth-link",
+      "_tvl": 0
+    },
+    {
+      "name": "CLM_uniswap_cow_arb_weth_usdt",
+      "address": "0x4c966576Ce6737F032E93006b8B7a679751A92ab",
+      "abi": "abi/clm_strategy.json",
+      "type": "harvest",
+      "enabled": false,
+      "params": [],
+      "cooldownSec": 21600,
+      "fixedRewardUSD": 0.3,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_vault_id": "uniswap-cow-arb-weth-usdt",
+      "_tvl": 0
+    }
+  ]
+}

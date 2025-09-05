@@ -108,13 +108,85 @@
         {
           "name": "CLM_USDC_DAI",
           "address": "0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec",
-          "abi": "abi/beefy_strategy.json",
+          "abi": "abi/clm_strategy.json",
           "type": "harvest",
           "enabled": true,
           "_note": "Beefy CLM USDC-DAI Strategy - Confirmed working harvest()",
           "_verify": "https://arbiscan.io/address/0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec#code",
           "_vault": "uniswap-cow-arb-usdc-dai",
           "_harvester": "0x03d9964f4d93a24b58c0fc3a8df3474b59ba8557",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "CLM_ZRO_WETH",
+          "address": "0xb683123DC034c75ce5e7C67DC5Dac153613ac250",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "CLM ZRO-WETH Strategy - Confirmed callable harvest()",
+          "_vault": "uniswap-cow-arb-zro-weth-0.3",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "CLM_LINK_ETH",
+          "address": "0xa84fb0A440C6073C467D52320C1Ff4fFfE02cF22",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "CLM LINK-ETH Strategy - Confirmed callable harvest()",
+          "_vault": "uniswap-cow-arb-link-eth",
+          "read": {
+            "lastHarvest": "lastHarvest"
+          },
+          "write": {
+            "exec": "harvest"
+          },
+          "params": [],
+          "rewardToken": "0x82aF49447D8a07e3bd95BD0d56f35241523fBab1",
+          "rewardTokenDecimals": 18,
+          "rewardTokenSymbol": "WETH",
+          "rewardPriceUSD": 2500.0,
+          "callFeeBps": 5,
+          "cooldownSec": 21600,
+          "minPendingRewardTokens": 0.00001,
+          "fixedRewardUSD": 0.30
+        },
+        {
+          "name": "CLM_WETH_USDT",
+          "address": "0x4c966576Ce6737F032E93006b8B7a679751A92ab",
+          "abi": "abi/clm_strategy.json",
+          "type": "harvest",
+          "enabled": true,
+          "_note": "CLM WETH-USDT Strategy - Confirmed callable harvest()",
+          "_vault": "uniswap-cow-arb-weth-usdt",
           "read": {
             "lastHarvest": "lastHarvest"
           },
