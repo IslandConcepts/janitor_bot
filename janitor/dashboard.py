@@ -44,8 +44,8 @@ class JanitorDashboard:
         )
         
         self.layout["left"].split_column(
-            Layout(name="stats", size=12),
-            Layout(name="liquidations", size=10),
+            Layout(name="stats", size=18),
+            Layout(name="liquidations", size=12),
             Layout(name="targets")
         )
         
@@ -253,65 +253,31 @@ class JanitorDashboard:
     
     def get_liquidation_panel(self) -> Panel:
         """Generate liquidation stats panel"""
-        table = Table(show_header=False, box=None, expand=True)
-        table.add_column("Chain", style="cyan")
-        table.add_column("Checks", justify="center")
-        table.add_column("Found", justify="center")
-        table.add_column("Profit", justify="right")
-        table.add_column("Status", justify="center")
+        # Create a simple stats display for liquidations
+        stats = Table(show_header=False, box=None, expand=True)
+        stats.add_column("Label", style="dim")
+        stats.add_column("Value", justify="right")
         
-        # Try to get liquidation stats
-        try:
-            # Import the bot to get stats (in production, pass this as parameter)
-            from janitor.janitor import JanitorBot
-            # This is a workaround - in production, pass the bot instance
-            liquidation_stats = {}
-            
-            # Add example stats for display
-            chains_data = {
-                'arbitrum': {
-                    'checks': 0,
-                    'found': 0,
-                    'profitable': 0,
-                    'executed': 0,
-                    'profit_usd': 0.0,
-                    'simulation_only': True
-                },
-                'base': {
-                    'checks': 0,
-                    'found': 0,
-                    'profitable': 0,
-                    'executed': 0,
-                    'profit_usd': 0.0,
-                    'simulation_only': True
-                }
-            }
-            
-            for chain, stats in chains_data.items():
-                status = "[yellow]SIM[/yellow]" if stats['simulation_only'] else "[green]LIVE[/green]"
-                profit_color = "green" if stats['profit_usd'] > 0 else "dim"
-                
-                table.add_row(
-                    chain.capitalize(),
-                    str(stats['checks']),
-                    str(stats['found']),
-                    f"[{profit_color}]${stats['profit_usd']:.2f}[/{profit_color}]",
-                    status
-                )
-            
-            # Add total row
-            table.add_row(
-                "[bold]Total[/bold]",
-                "[bold]0[/bold]",
-                "[bold]0[/bold]",
-                "[bold green]$0.00[/bold green]",
-                ""
-            )
-            
-        except Exception as e:
-            table.add_row("[red]Error loading stats[/red]", "", "", "", "")
+        # Add liquidation monitoring status
+        stats.add_row("[bold]FLASH LOANS[/bold]", "[yellow]SIMULATION[/yellow]")
+        stats.add_row("", "")
         
-        return Panel(table, title="⚡ Flash Loan Liquidations", border_style="magenta")
+        # Arbitrum stats
+        stats.add_row("Arbitrum Checks", "0")
+        stats.add_row("Arbitrum Found", "0")
+        stats.add_row("Arbitrum Profit", "[dim]$0.00[/dim]")
+        stats.add_row("", "")
+        
+        # Base stats
+        stats.add_row("Base Checks", "0")
+        stats.add_row("Base Found", "0")
+        stats.add_row("Base Profit", "[dim]$0.00[/dim]")
+        stats.add_row("", "")
+        
+        # Total
+        stats.add_row("[bold]Total Profit[/bold]", "[bold green]$0.00[/bold green]")
+        
+        return Panel(stats, title="⚡ Liquidation Monitor", border_style="magenta")
     
     def get_gas_panel(self) -> Panel:
         """Generate gas and balance info panel"""

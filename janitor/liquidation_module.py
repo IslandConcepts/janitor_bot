@@ -9,7 +9,6 @@ from web3 import Web3
 from janitor.market_monitor import AaveMarketMonitor, MonitorConfig
 from janitor.simple_storage import Storage
 from janitor.logging_config import get_logger
-from janitor.profit import calculate_profit_estimate
 
 logger = get_logger("janitor.liquidation")
 
