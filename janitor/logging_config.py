@@ -208,7 +208,10 @@ class JanitorLogger:
                        gas_used: int, profit_usd: float, status: str):
         """Log transaction details"""
         msg = f"CHAIN={chain} | TARGET={target} | TX={tx_hash} | GAS={gas_used} | PROFIT=${profit_usd:.4f} | STATUS={status}"
-        self.tx_logger.info(msg)
+        if hasattr(self, 'tx_logger'):
+            self.tx_logger.info(msg)
+        else:
+            self.logger.info(msg)
         
         # Also log to main logger with context
         self.logger.info(f"Transaction executed: {status}", extra={
