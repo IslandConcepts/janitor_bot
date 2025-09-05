@@ -210,32 +210,32 @@ class JanitorDashboard:
             ''').fetchall()
             
             for row in results:
-                # Determine status with animation
+                # Determine status with animation - all using -ing verbs
                 if row['paused_until'] and row['paused_until'] > time.time():
                     # Animate paused status
                     remaining = int(row['paused_until'] - time.time())
                     if self.animation_frame % 10 < 5:
-                        status = "[red]⏸ PAUSED[/red]"
+                        status = "[red]⏸ PAUSING[/red]"
                     else:
-                        status = "[bold red]⏸ PAUSED[/bold red]"
+                        status = "[bold red]⏸ RESTING[/bold red]"
                     status += f" ({remaining}s)"
                 elif row['consecutive_failures'] >= 3:
                     # Animate error status
                     if self.animation_frame % 8 < 4:
-                        status = "[red]❌ ERROR[/red]"
+                        status = "[red]❌ FAILING[/red]"
                     else:
-                        status = "[bold red]⚠ ERROR[/bold red]"
+                        status = "[bold red]⚠ RETRYING[/bold red]"
                 else:
-                    # Animate active status with different patterns
+                    # Animate active status with different patterns - all using -ing verbs
                     cycle = self.animation_frame % 60
                     if cycle < 15:
-                        status = "[green]✅ ACTIVE[/green]"
+                        status = "[green]✅ RUNNING[/green]"
                     elif cycle < 30:
-                        status = "[bold green]✅ ACTIVE[/bold green]"
+                        status = "[bold green]✅ MONITORING[/bold green]"
                     elif cycle < 45:
                         status = "[green]🔄 SCANNING[/green]"
                     else:
-                        status = "[bold green]⚡ READY[/bold green]"
+                        status = "[bold green]⚡ WATCHING[/bold green]"
                 
                 # Format last call time
                 if row['last_call_ts']:
@@ -278,7 +278,7 @@ class JanitorDashboard:
                         ).fetchone()
                         
                         if not exists:
-                            # Animate waiting status
+                            # Animate waiting status - all using -ing verbs
                             if self.animation_frame % 16 < 8:
                                 waiting_status = "[dim]⏳ WAITING[/dim]"
                             else:
