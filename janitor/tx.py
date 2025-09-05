@@ -18,8 +18,9 @@ class NonceManager:
         """Get next available nonce for address"""
         address = Web3.to_checksum_address(address)
         
-        # Get on-chain nonce
-        chain_nonce = w3.eth.get_transaction_count(address)
+        # Always get the pending nonce from the chain to avoid conflicts
+        # 'pending' includes both confirmed and pending transactions
+        chain_nonce = w3.eth.get_transaction_count(address, 'pending')
         
         # Use max of chain nonce and our tracked nonce
         if address in self.nonces:
@@ -43,6 +44,7 @@ class NonceManager:
             del self.nonces[address]
         if address in self.pending:
             del self.pending[address]
+        logger.info(f"Reset nonce tracking for {address}")
 
 class TransactionBuilder:
     """Build and send EIP-1559 transactions"""
@@ -98,23 +100,34 @@ class TransactionBuilder:
     ) -> str:
         """Sign and send transaction"""
         
-        # Create account from private key
-        account: LocalAccount = Account.from_key(chain_config['privateKey'])
-        
-        # Sign transaction
-        signed_tx = account.sign_transaction(transaction)
-        
-        # Handle different web3.py versions (rawTransaction vs raw_transaction)
-        raw_tx = getattr(signed_tx, 'rawTransaction', None) or getattr(signed_tx, 'raw_transaction', None)
-        if not raw_tx:
-            raise ValueError("Cannot find raw transaction attribute in SignedTransaction object")
-        
-        # Send transaction
-        tx_hash = w3.eth.send_raw_transaction(raw_tx)
-        
-        logger.info(f"Transaction sent: {tx_hash.hex()}")
-        
-        return tx_hash.hex()
+        try:
+            # Create account from private key
+            account: LocalAccount = Account.from_key(chain_config['privateKey'])
+            
+            # Sign transaction
+            signed_tx = account.sign_transaction(transaction)
+            
+            # Handle different web3.py versions (rawTransaction vs raw_transaction)
+            raw_tx = getattr(signed_tx, 'rawTransaction', None) or getattr(signed_tx, 'raw_transaction', None)
+            if not raw_tx:
+                raise ValueError("Cannot find raw transaction attribute in SignedTransaction object")
+            
+            # Send transaction
+            tx_hash = w3.eth.send_raw_transaction(raw_tx)
+            
+            logger.info(f"Transaction sent: {tx_hash.hex()}")
+            
+            return tx_hash.hex()
+            
+        except Exception as e:
+            error_msg = str(e).lower()
+            # If nonce error, reset nonce and retry on next attempt
+            if 'nonce' in error_msg:
+                from_address = transaction.get('from')
+                if from_address:
+                    logger.warning(f"Nonce error detected, resetting nonce for {from_address}")
+                    self.nonce_manager.reset(from_address)
+            raise
     
     def wait_for_receipt(
         self,
