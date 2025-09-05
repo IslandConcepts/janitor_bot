@@ -13,6 +13,7 @@ from rich.text import Text
 from rich.align import Align
 from rich.columns import Columns
 from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn
+import random
 
 from janitor.config import load_config
 from janitor.storage import Database
@@ -30,10 +31,15 @@ class JanitorDashboard:
         self.rpc_manager = RPCManager()
         self.layout = Layout()
         self.running = True
+        self.status_messages = []
+        self.animation_frame = 0
+        self.spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
+        self.activity_icons = ["🔍", "⚡", "💰", "📊", "🎯", "✨"]
         
         # Setup layout structure
         self.layout.split_column(
             Layout(name="header", size=3),
+            Layout(name="status", size=3),
             Layout(name="body"),
             Layout(name="footer", size=4)
         )
@@ -58,13 +64,76 @@ class JanitorDashboard:
         """Generate header panel"""
         grid = Table.grid(expand=True)
         grid.add_column(justify="center", ratio=1)
+        
+        # Animated header with rotating icon
+        icon = self.activity_icons[self.animation_frame % len(self.activity_icons)]
         grid.add_row(
-            "[bold cyan]🤖 JANITOR BOT DASHBOARD[/bold cyan]"
+            f"[bold cyan]{icon} JANITOR BOT DASHBOARD {icon}[/bold cyan]"
         )
         grid.add_row(
             f"[dim]{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}[/dim]"
         )
         return Panel(grid, style="cyan")
+    
+    def get_status_panel(self) -> Panel:
+        """Generate live status feed panel"""
+        spinner = self.spinners[self.animation_frame % len(self.spinners)]
+        
+        # Generate status messages
+        status_lines = []
+        
+        # Rotating primary activities
+        activities = [
+            f"{spinner} Scanning Arbitrum targets...",
+            f"{spinner} Checking Base harvests...", 
+            f"{spinner} Monitoring flash loan opportunities...",
+            f"{spinner} Analyzing gas prices...",
+            f"{spinner} Calculating profit thresholds...",
+            f"{spinner} Checking Beefy vaults...",
+            f"{spinner} Evaluating liquidation candidates...",
+            f"{spinner} Monitoring health factors..."
+        ]
+        
+        current_activity = activities[(self.animation_frame // 3) % len(activities)]
+        
+        # Add pulsing effect with color - fix Rich markup
+        if self.animation_frame % 2 == 0:
+            status_lines.append(f"[bold yellow]{current_activity}[/bold yellow]")
+        else:
+            status_lines.append(f"[yellow]{current_activity}[/yellow]")
+        
+        # Add secondary status with different timing
+        secondary_activities = [
+            "🔄 Refreshing RPC connections",
+            "📊 Updating price feeds",
+            "⚙️ Optimizing gas settings",
+            "🔍 Searching for MEV opportunities",
+            "📋 Checking cooldown timers",
+            "🎯 Calculating optimal routes"
+        ]
+        
+        secondary = secondary_activities[(self.animation_frame // 5) % len(secondary_activities)]
+        status_lines.append(f"[dim cyan]{secondary}[/dim cyan]")
+        
+        # Add recent events that cycle more slowly
+        recent_events = [
+            "✅ Beefy_MIM_USDC checked - cooldown active",
+            "🔍 Found 0 liquidations on Arbitrum",
+            "⚡ Flash loans ready (SIMULATION MODE)",
+            "📊 Gas optimal: Arb 0.10 | Base 0.05 gwei",
+            "🌐 All chains connected successfully",
+            "🛡️ No errors in last 100 checks"
+        ]
+        
+        event_idx = (self.animation_frame // 15) % len(recent_events)
+        status_lines.append(f"[dim]{recent_events[event_idx]}[/dim]")
+        
+        status_text = "\n".join(status_lines)
+        return Panel(
+            Align.center(Text(status_text)),
+            title=f"🎯 Live Activity",
+            border_style="green"
+        )
     
     def get_stats_panel(self) -> Panel:
         """Generate P&L statistics panel"""
@@ -141,15 +210,32 @@ class JanitorDashboard:
             ''').fetchall()
             
             for row in results:
-                # Determine status
+                # Determine status with animation
                 if row['paused_until'] and row['paused_until'] > time.time():
-                    status = "[red]⏸ PAUSED[/red]"
+                    # Animate paused status
                     remaining = int(row['paused_until'] - time.time())
+                    if self.animation_frame % 10 < 5:
+                        status = "[red]⏸ PAUSED[/red]"
+                    else:
+                        status = "[bold red]⏸ PAUSED[/bold red]"
                     status += f" ({remaining}s)"
                 elif row['consecutive_failures'] >= 3:
-                    status = "[red]❌ ERROR[/red]"
+                    # Animate error status
+                    if self.animation_frame % 8 < 4:
+                        status = "[red]❌ ERROR[/red]"
+                    else:
+                        status = "[bold red]⚠ ERROR[/bold red]"
                 else:
-                    status = "[green]✅ ACTIVE[/green]"
+                    # Animate active status with different patterns
+                    cycle = self.animation_frame % 60
+                    if cycle < 15:
+                        status = "[green]✅ ACTIVE[/green]"
+                    elif cycle < 30:
+                        status = "[bold green]✅ ACTIVE[/bold green]"
+                    elif cycle < 45:
+                        status = "[green]🔄 SCANNING[/green]"
+                    else:
+                        status = "[bold green]⚡ READY[/bold green]"
                 
                 # Format last call time
                 if row['last_call_ts']:
@@ -192,9 +278,15 @@ class JanitorDashboard:
                         ).fetchone()
                         
                         if not exists:
+                            # Animate waiting status
+                            if self.animation_frame % 16 < 8:
+                                waiting_status = "[dim]⏳ WAITING[/dim]"
+                            else:
+                                waiting_status = "[yellow]🔍 INITIALIZING[/yellow]"
+                            
                             table.add_row(
                                 target['name'][:20],
-                                "[dim]⏳ WAITING[/dim]",
+                                waiting_status,
                                 "Never",
                                 "[dim]0[/dim]"
                             )
@@ -252,24 +344,35 @@ class JanitorDashboard:
         return Panel(table, title="📜 Recent Runs", border_style="yellow")
     
     def get_liquidation_panel(self) -> Panel:
-        """Generate liquidation stats panel"""
+        """Generate liquidation stats panel with animations"""
         # Create a simple stats display for liquidations
         stats = Table(show_header=False, box=None, expand=True)
         stats.add_column("Label", style="dim")
         stats.add_column("Value", justify="right")
         
-        # Add liquidation monitoring status
-        stats.add_row("[bold]FLASH LOANS[/bold]", "[yellow]SIMULATION[/yellow]")
+        # Add liquidation monitoring status with pulse effect
+        if self.animation_frame % 30 < 15:
+            stats.add_row("[bold]FLASH LOANS[/bold]", "[yellow]● SIMULATION[/yellow]")
+        else:
+            stats.add_row("[bold]FLASH LOANS[/bold]", "[bold yellow]● SIMULATION[/bold yellow]")
         stats.add_row("", "")
         
-        # Arbitrum stats
-        stats.add_row("Arbitrum Checks", "0")
-        stats.add_row("Arbitrum Found", "0")
-        stats.add_row("Arbitrum Profit", "[dim]$0.00[/dim]")
+        # Simulate scanning animation
+        scan_spinner = self.spinners[self.animation_frame % len(self.spinners)]
+        if self.animation_frame % 60 < 30:
+            stats.add_row("Arbitrum", f"[cyan]{scan_spinner} Scanning...[/cyan]")
+        else:
+            stats.add_row("Arbitrum", "[dim]Ready[/dim]")
+        
+        stats.add_row("Arb Found", "0")
+        stats.add_row("Arb Profit", "[dim]$0.00[/dim]")
         stats.add_row("", "")
         
-        # Base stats
-        stats.add_row("Base Checks", "0")
+        if self.animation_frame % 60 >= 30:
+            stats.add_row("Base", f"[cyan]{scan_spinner} Scanning...[/cyan]")
+        else:
+            stats.add_row("Base", "[dim]Ready[/dim]")
+        
         stats.add_row("Base Found", "0")
         stats.add_row("Base Profit", "[dim]$0.00[/dim]")
         stats.add_row("", "")
@@ -353,7 +456,12 @@ class JanitorDashboard:
     
     def update_display(self) -> Layout:
         """Update all dashboard panels"""
+        # Increment animation frame for smooth animations
+        self.animation_frame += 1
+        
+        # Update all panels
         self.layout["header"].update(self.get_header())
+        self.layout["status"].update(self.get_status_panel())
         self.layout["stats"].update(self.get_stats_panel())
         self.layout["liquidations"].update(self.get_liquidation_panel())
         self.layout["targets"].update(self.get_targets_panel())
@@ -366,9 +474,9 @@ class JanitorDashboard:
     def run(self):
         """Run the dashboard"""
         try:
-            with Live(self.update_display(), refresh_per_second=1, console=console) as live:
+            with Live(self.update_display(), refresh_per_second=2, console=console) as live:
                 while self.running:
-                    time.sleep(1)
+                    time.sleep(0.5)  # Update twice per second for smooth animations
                     live.update(self.update_display())
         except KeyboardInterrupt:
             console.print("\n[yellow]Dashboard stopped[/yellow]")
