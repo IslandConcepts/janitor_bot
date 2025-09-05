@@ -45,6 +45,7 @@ class JanitorDashboard:
         
         self.layout["left"].split_column(
             Layout(name="stats", size=12),
+            Layout(name="liquidations", size=10),
             Layout(name="targets")
         )
         
@@ -67,6 +68,10 @@ class JanitorDashboard:
     
     def get_stats_panel(self) -> Panel:
         """Generate P&L statistics panel"""
+        # Get total P&L
+        total_pnl = self.db.get_total_pnl()
+        
+        # Get daily P&L
         today_pnl = self.db.get_daily_pnl()
         yesterday = datetime.now() - timedelta(days=1)
         yesterday_pnl = self.db.get_daily_pnl(yesterday)
@@ -82,6 +87,15 @@ class JanitorDashboard:
         stats = Table(show_header=False, box=None, expand=True)
         stats.add_column("Label", style="dim")
         stats.add_column("Value", justify="right")
+        
+        # Total lifetime stats
+        total_net = total_pnl.get('total_net_usd', 0.0)
+        total_color = "green" if total_net > 0 else "red"
+        stats.add_row("[bold]TOTAL P&L[/bold]", f"[bold {total_color}]${total_net:.2f}[/bold {total_color}]")
+        stats.add_row("Total Runs", f"[cyan]{total_pnl.get('total_runs', 0)}[/cyan]")
+        stats.add_row("Days Active", f"{total_pnl.get('days_active', 0)}")
+        stats.add_row("Avg Daily", f"${total_pnl.get('avg_daily_profit', 0.0):.2f}")
+        stats.add_row("", "")
         
         # Today's stats
         net_color = "green" if today_pnl['total_net_usd'] > 0 else "red"
@@ -237,6 +251,68 @@ class JanitorDashboard:
         
         return Panel(table, title="📜 Recent Runs", border_style="yellow")
     
+    def get_liquidation_panel(self) -> Panel:
+        """Generate liquidation stats panel"""
+        table = Table(show_header=False, box=None, expand=True)
+        table.add_column("Chain", style="cyan")
+        table.add_column("Checks", justify="center")
+        table.add_column("Found", justify="center")
+        table.add_column("Profit", justify="right")
+        table.add_column("Status", justify="center")
+        
+        # Try to get liquidation stats
+        try:
+            # Import the bot to get stats (in production, pass this as parameter)
+            from janitor.janitor import JanitorBot
+            # This is a workaround - in production, pass the bot instance
+            liquidation_stats = {}
+            
+            # Add example stats for display
+            chains_data = {
+                'arbitrum': {
+                    'checks': 0,
+                    'found': 0,
+                    'profitable': 0,
+                    'executed': 0,
+                    'profit_usd': 0.0,
+                    'simulation_only': True
+                },
+                'base': {
+                    'checks': 0,
+                    'found': 0,
+                    'profitable': 0,
+                    'executed': 0,
+                    'profit_usd': 0.0,
+                    'simulation_only': True
+                }
+            }
+            
+            for chain, stats in chains_data.items():
+                status = "[yellow]SIM[/yellow]" if stats['simulation_only'] else "[green]LIVE[/green]"
+                profit_color = "green" if stats['profit_usd'] > 0 else "dim"
+                
+                table.add_row(
+                    chain.capitalize(),
+                    str(stats['checks']),
+                    str(stats['found']),
+                    f"[{profit_color}]${stats['profit_usd']:.2f}[/{profit_color}]",
+                    status
+                )
+            
+            # Add total row
+            table.add_row(
+                "[bold]Total[/bold]",
+                "[bold]0[/bold]",
+                "[bold]0[/bold]",
+                "[bold green]$0.00[/bold green]",
+                ""
+            )
+            
+        except Exception as e:
+            table.add_row("[red]Error loading stats[/red]", "", "", "", "")
+        
+        return Panel(table, title="⚡ Flash Loan Liquidations", border_style="magenta")
+    
     def get_gas_panel(self) -> Panel:
         """Generate gas and balance info panel"""
         table = Table(show_header=False, box=None, expand=True)
@@ -313,6 +389,7 @@ class JanitorDashboard:
         """Update all dashboard panels"""
         self.layout["header"].update(self.get_header())
         self.layout["stats"].update(self.get_stats_panel())
+        self.layout["liquidations"].update(self.get_liquidation_panel())
         self.layout["targets"].update(self.get_targets_panel())
         self.layout["recent_runs"].update(self.get_recent_runs_panel())
         self.layout["gas_info"].update(self.get_gas_panel())

@@ -206,6 +206,48 @@ class Database:
                 return result['paused_until'] > int(datetime.now().timestamp())
             return False
     
+    def get_total_pnl(self) -> Dict[str, Any]:
+        """Get total P&L summary since inception"""
+        with self.get_conn() as conn:
+            # Get all successful runs
+            runs = conn.execute('''
+                SELECT 
+                    COUNT(*) as total_count,
+                    SUM(gas_cost_usd) as total_gas,
+                    SUM(reward_usd) as total_reward,
+                    SUM(net_usd) as total_net,
+                    MIN(timestamp) as first_run,
+                    MAX(timestamp) as last_run
+                FROM runs
+                WHERE status = 'success'
+            ''').fetchone()
+            
+            # Get failure count
+            failures = conn.execute('''
+                SELECT COUNT(*) as count
+                FROM runs
+                WHERE status = 'failed'
+            ''').fetchone()
+            
+            # Calculate days active
+            days_active = 0
+            if runs['first_run'] and runs['last_run']:
+                first_date = datetime.fromtimestamp(runs['first_run'])
+                last_date = datetime.fromtimestamp(runs['last_run'])
+                days_active = (last_date - first_date).days + 1
+            
+            return {
+                'total_runs': runs['total_count'] or 0,
+                'total_failures': failures['count'] or 0,
+                'total_gas_usd': runs['total_gas'] or 0.0,
+                'total_reward_usd': runs['total_reward'] or 0.0,
+                'total_net_usd': runs['total_net'] or 0.0,
+                'first_run': datetime.fromtimestamp(runs['first_run']) if runs['first_run'] else None,
+                'last_run': datetime.fromtimestamp(runs['last_run']) if runs['last_run'] else None,
+                'days_active': days_active,
+                'avg_daily_profit': (runs['total_net'] or 0.0) / days_active if days_active > 0 else 0.0
+            }
+    
     def get_daily_pnl(self, date: Optional[datetime] = None) -> Dict[str, Any]:
         """Get daily P&L summary"""
         if date is None:

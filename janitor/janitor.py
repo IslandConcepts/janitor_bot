@@ -13,6 +13,7 @@ from janitor.storage import Database
 from janitor.utils import calculate_time_until
 from janitor.logging_config import get_logger, setup_logging
 from janitor.profit_tracker import ProfitTracker, ProfitReconciler
+from janitor.simple_storage import Storage as SimpleStorage
 
 logger = get_logger(__name__)
 
@@ -30,10 +31,15 @@ class JanitorBot:
         self.rpc_manager = RPCManager()
         self.tx_builder = TransactionBuilder()
         self.db = Database("data/janitor.db")
+        self.storage = SimpleStorage({'dataDir': 'data'})
+        self.w3_instances = {}  # Will be populated during chain setup
         
         # Control flags
         self.running = True
         self.paused = False
+        
+        # Liquidation module (will be initialized later)
+        self.liquidation_module = None
         
         # Register signal handlers
         signal.signal(signal.SIGINT, self.shutdown_handler)
@@ -48,6 +54,59 @@ class JanitorBot:
         """Handle graceful shutdown"""
         logger.info("Shutdown signal received", signal=signum)
         self.running = False
+        
+        # Stop liquidation module if running
+        if self.liquidation_module:
+            self.liquidation_module.stop()
+    
+    def _initialize_liquidations(self):
+        """Initialize liquidation module if enabled"""
+        try:
+            # Load liquidation config
+            import json
+            import os
+            
+            liquidation_config_path = "liquidation_config.json"
+            if os.path.exists(liquidation_config_path):
+                with open(liquidation_config_path, 'r') as f:
+                    liquidation_config = json.load(f)
+                
+                if liquidation_config.get('liquidations', {}).get('enabled', False):
+                    # Populate w3_instances for each chain
+                    for chain_name, chain_config in self.config['chains'].items():
+                        if chain_config.get('enabled'):
+                            w3 = self.rpc_manager.get_web3(chain_name, chain_config['rpc'])
+                            self.w3_instances[chain_name] = w3
+                    
+                    # Merge liquidation config with main config
+                    self.config['liquidations'] = liquidation_config['liquidations']
+                    
+                    # Import and initialize liquidation module
+                    from janitor.liquidation_module import LiquidationModule
+                    
+                    self.liquidation_module = LiquidationModule(
+                        config=self.config,
+                        w3_instances=self.w3_instances,
+                        storage=self.storage
+                    )
+                    
+                    # Start monitoring
+                    self.liquidation_module.start()
+                    
+                    logger.info("Liquidation module initialized and started")
+                else:
+                    logger.info("Liquidations disabled in config")
+            else:
+                logger.info("No liquidation config found")
+                
+        except Exception as e:
+            logger.error(f"Failed to initialize liquidations: {e}")
+    
+    def get_liquidation_stats(self) -> Dict:
+        """Get liquidation statistics for dashboard"""
+        if self.liquidation_module:
+            return self.liquidation_module.get_stats()
+        return {}
     
     def read_target_state(self, w3, target: Dict[str, Any]) -> Dict[str, Any]:
         """Read on-chain state for target"""
@@ -396,17 +455,48 @@ class JanitorBot:
     def run(self):
         """Start the janitor bot"""
         try:
-            # Log daily P&L at startup
-            pnl = self.db.get_daily_pnl()
-            net_usd = pnl.get('total_net_usd', 0) or 0
-            total_runs = pnl.get('total_runs', 0) or 0
-            total_failures = pnl.get('total_failures', 0) or 0
+            # Log total P&L at startup
+            total_pnl = self.db.get_total_pnl()
+            total_net = total_pnl.get('total_net_usd', 0) or 0
+            total_runs = total_pnl.get('total_runs', 0) or 0
+            days_active = total_pnl.get('days_active', 0) or 0
+            avg_daily = total_pnl.get('avg_daily_profit', 0) or 0
             
-            logger.info(f"Today's P&L: net=${net_usd:.2f}, "
-                       f"runs={total_runs}, failures={total_failures}",
-                       daily_net_usd=net_usd,
-                       daily_runs=total_runs,
-                       daily_failures=total_failures)
+            print(f"\n{'='*60}")
+            print(f"JANITOR BOT LIFETIME STATISTICS")
+            print(f"{'='*60}")
+            print(f"Total Net Profit: ${total_net:.2f}")
+            print(f"Total Runs: {total_runs}")
+            print(f"Days Active: {days_active}")
+            print(f"Average Daily: ${avg_daily:.2f}")
+            if total_pnl.get('first_run'):
+                print(f"First Run: {total_pnl['first_run'].strftime('%Y-%m-%d')}")
+            print(f"{'='*60}\n")
+            
+            logger.info(f"Lifetime P&L: net=${total_net:.2f}, "
+                       f"runs={total_runs}, days={days_active}, "
+                       f"avg_daily=${avg_daily:.2f}",
+                       total_net_usd=total_net,
+                       total_runs=total_runs,
+                       days_active=days_active,
+                       avg_daily_profit=avg_daily)
+            
+            # Log daily P&L at startup
+            daily_pnl = self.db.get_daily_pnl()
+            daily_net = daily_pnl.get('total_net_usd', 0) or 0
+            daily_runs = daily_pnl.get('total_runs', 0) or 0
+            daily_failures = daily_pnl.get('total_failures', 0) or 0
+            
+            print(f"Today's P&L: ${daily_net:.2f} ({daily_runs} runs, {daily_failures} failures)\n")
+            
+            logger.info(f"Today's P&L: net=${daily_net:.2f}, "
+                       f"runs={daily_runs}, failures={daily_failures}",
+                       daily_net_usd=daily_net,
+                       daily_runs=daily_runs,
+                       daily_failures=daily_failures)
+            
+            # Initialize liquidation module if enabled
+            self._initialize_liquidations()
             
             logger.info("Starting main loop...")
             
