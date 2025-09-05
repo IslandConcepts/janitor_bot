@@ -222,7 +222,7 @@ class JanitorDashboard:
                 elif row['consecutive_failures'] >= 3:
                     # Animate error status
                     if self.animation_frame % 8 < 4:
-                        status = "[red]❌ FAILING[/red]"
+                        status = "[red]❌ ERROR[/red]"
                     else:
                         status = "[bold red]⚠ RETRYING[/bold red]"
                 else:
@@ -231,11 +231,11 @@ class JanitorDashboard:
                     if cycle < 15:
                         status = "[green]✅ RUNNING[/green]"
                     elif cycle < 30:
-                        status = "[bold green]✅ MONITORING[/bold green]"
+                        status = "[bold green]🔄 SCANNING[/bold green]"
                     elif cycle < 45:
-                        status = "[green]🔄 SCANNING[/green]"
+                        status = "[green]⚡ WATCHING[/green]"
                     else:
-                        status = "[bold green]⚡ WATCHING[/bold green]"
+                        status = "[bold green]✅ CHECKING[/bold green]"
                 
                 # Format last call time
                 if row['last_call_ts']:
