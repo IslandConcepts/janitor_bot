@@ -99,11 +99,11 @@ class JanitorDashboard:
         
         current_activity = activities[(self.animation_frame // 3) % len(activities)]
         
-        # Add pulsing effect with color - fix Rich markup
+        # Add pulsing effect without color codes
         if self.animation_frame % 2 == 0:
-            status_lines.append(f"[bold yellow]{current_activity}[/bold yellow]")
+            status_lines.append(f"▶ {current_activity}")
         else:
-            status_lines.append(f"[yellow]{current_activity}[/yellow]")
+            status_lines.append(f"  {current_activity}")
         
         # Add secondary status with different timing
         secondary_activities = [
@@ -116,7 +116,7 @@ class JanitorDashboard:
         ]
         
         secondary = secondary_activities[(self.animation_frame // 5) % len(secondary_activities)]
-        status_lines.append(f"[dim cyan]{secondary}[/dim cyan]")
+        status_lines.append(f"  {secondary}")
         
         # Add recent events that cycle more slowly
         recent_events = [
@@ -129,7 +129,7 @@ class JanitorDashboard:
         ]
         
         event_idx = (self.animation_frame // 15) % len(recent_events)
-        status_lines.append(f"[dim]{recent_events[event_idx]}[/dim]")
+        status_lines.append(f"  {recent_events[event_idx]}")
         
         status_text = "\n".join(status_lines)
         return Panel(
