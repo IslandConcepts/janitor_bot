@@ -1,0 +1,387 @@
+{
+  "chain": "base",
+  "discovered": 30,
+  "timestamp": "2025-09-04 23:52:48",
+  "targets": [
+    {
+      "name": "aerodrome_usdz_weth",
+      "address": "0xd3c1e204E32A72915821f0EbE5615f4A783D7E5f",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aero_cow_tbtc_weth_vault",
+      "address": "0x11dD6940AeA57aAC6aC4D204E13161BB6E5Bf0A8",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_aero_wsteth",
+      "address": "0x68d24F7C60D316EB27e116A9910902Ff23CD8f1E",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "morpho_seamless_cbbtc",
+      "address": "0xC02ceF879331834a7823f2AfAD6a1DF7d9DB6C05",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_weth_usdc",
+      "address": "0x9bd7A4b5D5Fe8C7dd39D085279306309fA6F1a15",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_wblt_usdc_vault",
+      "address": "0x839bF2dB6D715d1E1e3DA365f73f026A8d47Fd4c",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "morpho_seamless_weth",
+      "address": "0xD612Bb264F973076ea934f2080BAc1fC2e7d8238",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "morpho_morpho_eusd",
+      "address": "0x38233654FB0843c8024527682352A5d41E7f7324",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "baseswap_cow_cbeth_cbbtc_vault",
+      "address": "0x0f18dD0bc8aCFce3DFc9138Bb1b8225658FF1284",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_weth_yfi",
+      "address": "0x21F66902C2f5110566072D44254302eAE13e6C88",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "alienbase_alb_weth",
+      "address": "0x8F8126C13bBa042084BAa81890ef17Bb61b4Da27",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_base_weth_cbada_",
+      "address": "0x5fd32F7F174A08bb2A2Bfe2d9cbDb4619dFcF277",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_weth_tarot",
+      "address": "0xd4fe29c3A1101733bc48BCaFab509cd461c014Ae",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_base_weth_uapt_v",
+      "address": "0xe2B930A07494A3CC0de678a61128f46e76f3AA62",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_base_weth_kta_va",
+      "address": "0x63c5c1A89b3dd83bcd6cab6aaB695EeFaA83D7d0",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_weth_drv_vault",
+      "address": "0x1148643553A8F438B859745E8006e01620a9bC3C",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_rsr_bsdeth",
+      "address": "0x693288C8f52752d921B03E8b0229c947f857D1f7",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_cow_base_uxrp_weth_v",
+      "address": "0x7a60321dcf2e2066dF73E6beD4F58f9d3Cb1Cd20",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_usdc_mai",
+      "address": "0xD73c6B7b020e8Dd6F9eD7097923f5Bf9fE176D81",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    },
+    {
+      "name": "aerodrome_weth_ghst",
+      "address": "0xc327C62072EB5e02Dfb8eca6AF050185707A7C01",
+      "abi": "abi/beefy_strategy.json",
+      "type": "harvest",
+      "enabled": true,
+      "params": [],
+      "cooldownSec": 43200,
+      "fixedRewardUSD": 0.4,
+      "read": {
+        "lastHarvest": "lastHarvest"
+      },
+      "write": {
+        "exec": "harvest"
+      },
+      "_score": 19,
+      "_recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "_tvl": 0
+    }
+  ]
+}

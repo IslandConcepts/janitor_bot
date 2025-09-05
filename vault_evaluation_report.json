@@ -1,0 +1,559 @@
+{
+  "timestamp": "2025-09-04T23:47:19.158119",
+  "total_vaults": 32,
+  "average_score": 19.4375,
+  "by_recommendation": {
+    "highly_recommended": [
+      "Beefy_MIM_USDC",
+      "Beefy_USDC_USDT_GHO",
+      "Beefy_tBTC_WBTC",
+      "BASE_CLM_WETH_USDBC",
+      "BASE_CLM_WETH_ZRO",
+      "BASE_CLM_WETH_PEPE",
+      "BASE_CLM_HIGHER_WETH",
+      "BASE_CLM_WETH_BRETT",
+      "BASE_Beefy_USDZ_WETH",
+      "BASE_Beefy_AERO_wstETH",
+      "BASE_Beefy_WETH_USDC",
+      "BASE_Beefy_WETH_YFI",
+      "BASE_Beefy_ALB_WETH",
+      "BASE_Beefy_WETH_TAROT",
+      "BASE_Beefy_RSR_bsdETH",
+      "CLM_USDC_DAI",
+      "CLM_ZRO_WETH",
+      "CLM_LINK_ETH",
+      "CLM_WETH_USDT"
+    ],
+    "recommended": [
+      "BASE_Morpho_cbBTC",
+      "BASE_Morpho_WETH",
+      "BASE_Morpho_EUSD",
+      "BASE_Beefy_USDC_MAI",
+      "BASE_Beefy_WETH_GHST",
+      "BASE_Beefy_AERO_L2VE",
+      "BASE_Beefy_WETH_KLIMA",
+      "BASE_Beefy_WETH_VEIL",
+      "BASE_Beefy_WETH_DEGEN",
+      "BASE_Beefy_WETH_CHAMP",
+      "BASE_Beefy_DAI_USDC",
+      "BASE_Beefy_USDp_MAI",
+      "BASE_Beefy_tBTC_WETH"
+    ],
+    "marginal": [],
+    "not_recommended": []
+  },
+  "detailed_scores": [
+    {
+      "name": "Beefy_MIM_USDC",
+      "chain": "arbitrum",
+      "address": "0xE1fF230cFe84d3Aa6c6C821b499B620D17F45174",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "Beefy_USDC_USDT_GHO",
+      "chain": "arbitrum",
+      "address": "0xCcA14Cac1aFD72bc6fb964850936B7a51AEa1E24",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "Beefy_tBTC_WBTC",
+      "chain": "arbitrum",
+      "address": "0xa2172783Eafd97FBF25bffFAFda3aD03B5115613",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_CLM_WETH_USDBC",
+      "chain": "base",
+      "address": "0xbEc422B86DE3EAD873Dd60840b6068FE8944dB41",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 3,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_CLM_WETH_ZRO",
+      "chain": "base",
+      "address": "0x672927AEcA0641d9e733ef90D41d0cf92c3dd9dF",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 3,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_CLM_WETH_PEPE",
+      "chain": "base",
+      "address": "0x8fd707FE75a953b3dF71C2b04b2F1eb88E463c95",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 3,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_CLM_HIGHER_WETH",
+      "chain": "base",
+      "address": "0x16EC9E361f6b28Fb9A9CA366d2a09c82d36B369A",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 3,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_CLM_WETH_BRETT",
+      "chain": "base",
+      "address": "0xeB47c3bc2923A6bE10B4c7f662c02590652E224f",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 3,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_USDZ_WETH",
+      "chain": "base",
+      "address": "0xd3c1e204E32A72915821f0EbE5615f4A783D7E5f",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_AERO_wstETH",
+      "chain": "base",
+      "address": "0x68d24F7C60D316EB27e116A9910902Ff23CD8f1E",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_USDC",
+      "chain": "base",
+      "address": "0x9bd7A4b5D5Fe8C7dd39D085279306309fA6F1a15",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_YFI",
+      "chain": "base",
+      "address": "0x21F66902C2f5110566072D44254302eAE13e6C88",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_ALB_WETH",
+      "chain": "base",
+      "address": "0x8F8126C13bBa042084BAa81890ef17Bb61b4Da27",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_TAROT",
+      "chain": "base",
+      "address": "0xd4fe29c3A1101733bc48BCaFab509cd461c014Ae",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_RSR_bsdETH",
+      "chain": "base",
+      "address": "0x693288C8f52752d921B03E8b0229c947f857D1f7",
+      "total_score": 21,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "CLM_USDC_DAI",
+      "chain": "arbitrum",
+      "address": "0x33a8B05CAf2853D724c18432762A6B7EbC1DCBec",
+      "total_score": 20,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 2,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "CLM_ZRO_WETH",
+      "chain": "arbitrum",
+      "address": "0xb683123DC034c75ce5e7C67DC5Dac153613ac250",
+      "total_score": 20,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 2,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "CLM_LINK_ETH",
+      "chain": "arbitrum",
+      "address": "0xa84fb0A440C6073C467D52320C1Ff4fFfE02cF22",
+      "total_score": 20,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 2,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "CLM_WETH_USDT",
+      "chain": "arbitrum",
+      "address": "0x4c966576Ce6737F032E93006b8B7a679751A92ab",
+      "total_score": 20,
+      "recommendation": "\ud83c\udfc6 HIGHLY RECOMMENDED - Add with high priority",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 4,
+        "cadence": 4,
+        "tvl": 2,
+        "gas_headroom": 2,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Morpho_cbBTC",
+      "chain": "base",
+      "address": "0xC02ceF879331834a7823f2AfAD6a1DF7d9DB6C05",
+      "total_score": 19,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 2,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Morpho_WETH",
+      "chain": "base",
+      "address": "0xD612Bb264F973076ea934f2080BAc1fC2e7d8238",
+      "total_score": 19,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 2,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Morpho_EUSD",
+      "chain": "base",
+      "address": "0x38233654FB0843c8024527682352A5d41E7f7324",
+      "total_score": 19,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 4,
+        "incentive_clarity": 2,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_USDC_MAI",
+      "chain": "base",
+      "address": "0xaC1a96Bf0057D39e22AF4Bb69a93d964AB2A623e",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_GHST",
+      "chain": "base",
+      "address": "0x87Be7BC3AC98cb57e77B5b6B42e1e0D6D40bF3EB",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_AERO_L2VE",
+      "chain": "base",
+      "address": "0xB8C7Ce0eD3d83b7f39061ecB5c2F982B0B6DeC5a",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_KLIMA",
+      "chain": "base",
+      "address": "0xD2bf4e3FAF0a0E30a59F86c90e963CF8d21F0a31",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_VEIL",
+      "chain": "base",
+      "address": "0x95502E37D07cD3Af69681cF68a82fc956d08aC3B",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_DEGEN",
+      "chain": "base",
+      "address": "0x8F4ad446eCF31AE2Bd69b4eD965AacFA8aa953A3",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_WETH_CHAMP",
+      "chain": "base",
+      "address": "0x332aAc4ad6e67A8A2f1dfC6E4Cf7f3b332d56D69",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_DAI_USDC",
+      "chain": "base",
+      "address": "0x3dE96c7eAC37Dd99c8BDB6CC88cc72f7f63fb0b1",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_USDp_MAI",
+      "chain": "base",
+      "address": "0xd95d21DAFf3eED3f30D67a96e7D90eFEB756B7aF",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    },
+    {
+      "name": "BASE_Beefy_tBTC_WETH",
+      "chain": "base",
+      "address": "0xD2f383D14DE3E74f2bf0ED9abFF2d0CD8dE04fa1",
+      "total_score": 17,
+      "recommendation": "\u2705 RECOMMENDED - Good candidate for harvesting",
+      "tvl": 1000000,
+      "scores": {
+        "call_surface": 0,
+        "incentive_clarity": 4,
+        "cadence": 3,
+        "tvl": 2,
+        "gas_headroom": 4,
+        "no_odd_roles": 4
+      }
+    }
+  ]
+}
