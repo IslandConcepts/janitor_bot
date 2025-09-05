@@ -35,6 +35,9 @@ class JanitorDashboard:
         self.animation_frame = 0
         self.spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
         self.activity_icons = ["🔍", "⚡", "💰", "📊", "🎯", "✨"]
+        self.targets_page = 0
+        self.targets_per_page = 15
+        self.page_switch_interval = 5  # Switch pages every 5 seconds
         
         # Setup layout structure
         self.layout.split_column(
@@ -190,12 +193,9 @@ class JanitorDashboard:
         return Panel(stats, title="📊 P&L Statistics", border_style="green")
     
     def get_targets_panel(self) -> Panel:
-        """Generate targets status panel"""
-        table = Table(expand=True)
-        table.add_column("Target", style="cyan", no_wrap=True)
-        table.add_column("Status", justify="center")
-        table.add_column("Last Call", justify="center")
-        table.add_column("Failures", justify="center")
+        """Generate targets status panel with paging like an airport display"""
+        # Collect all target data first
+        all_targets = []
         
         # Get target states from database
         with self.db.get_conn() as conn:
@@ -259,12 +259,12 @@ class JanitorDashboard:
                 else:
                     failures_str = f"[red]{failures}[/red]"
                 
-                table.add_row(
-                    row['target'][:20],
-                    status,
-                    last_call_str,
-                    failures_str
-                )
+                all_targets.append({
+                    'name': row['target'][:20],
+                    'status': status,
+                    'last_call': last_call_str,
+                    'failures': failures_str
+                })
         
         # Add configured but not yet run targets
         for chain_name, chain_config in self.config['chains'].items():
@@ -284,14 +284,59 @@ class JanitorDashboard:
                             else:
                                 waiting_status = "[yellow]🔍 INITIALIZING[/yellow]"
                             
-                            table.add_row(
-                                target['name'][:20],
-                                waiting_status,
-                                "Never",
-                                "[dim]0[/dim]"
-                            )
+                            all_targets.append({
+                                'name': target['name'][:20],
+                                'status': waiting_status,
+                                'last_call': "Never",
+                                'failures': "[dim]0[/dim]"
+                            })
         
-        return Panel(table, title="🎯 Targets", border_style="blue")
+        # Calculate paging
+        total_targets = len(all_targets)
+        total_pages = (total_targets + self.targets_per_page - 1) // self.targets_per_page
+        
+        # Auto-advance page every N seconds (like airport display)
+        if total_pages > 1:
+            # Change page based on animation frame
+            seconds_elapsed = self.animation_frame // 2  # 2 updates per second
+            self.targets_page = (seconds_elapsed // self.page_switch_interval) % total_pages
+        else:
+            self.targets_page = 0
+        
+        # Get targets for current page
+        start_idx = self.targets_page * self.targets_per_page
+        end_idx = min(start_idx + self.targets_per_page, total_targets)
+        page_targets = all_targets[start_idx:end_idx]
+        
+        # Build table for current page
+        table = Table(expand=True)
+        table.add_column("Target", style="cyan", no_wrap=True)
+        table.add_column("Status", justify="center")
+        table.add_column("Last Call", justify="center")
+        table.add_column("Failures", justify="center")
+        
+        for target in page_targets:
+            table.add_row(
+                target['name'],
+                target['status'],
+                target['last_call'],
+                target['failures']
+            )
+        
+        # Add page indicator if multiple pages
+        title = "🎯 Targets"
+        if total_pages > 1:
+            # Create page dots indicator
+            dots = []
+            for i in range(total_pages):
+                if i == self.targets_page:
+                    dots.append("●")
+                else:
+                    dots.append("○")
+            page_indicator = " ".join(dots)
+            title = f"🎯 Targets [{self.targets_page + 1}/{total_pages}] {page_indicator}"
+        
+        return Panel(table, title=title, border_style="blue")
     
     def get_recent_runs_panel(self) -> Panel:
         """Generate recent runs panel"""
