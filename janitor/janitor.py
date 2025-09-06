@@ -14,6 +14,7 @@ from janitor.utils import calculate_time_until
 from janitor.logging_config import get_logger, setup_logging
 from janitor.profit_tracker import ProfitTracker, ProfitReconciler
 from janitor.simple_storage import Storage as SimpleStorage
+from janitor.wallet_monitor import WalletMonitor
 
 logger = get_logger(__name__)
 
@@ -33,6 +34,7 @@ class JanitorBot:
         self.db = Database("data/janitor.db")
         self.storage = SimpleStorage({'dataDir': 'data'})
         self.w3_instances = {}  # Will be populated during chain setup
+        self.wallet_monitor = WalletMonitor(self.rpc_manager)
         
         # Control flags
         self.running = True
@@ -273,6 +275,9 @@ class JanitorBot:
             
             print(f"  🚀 {target['name']}: Attempting harvest...")
             
+            # Check wallet balances before harvest
+            before_balances = self.wallet_monitor.check_balances(chain_name, chain_config)
+            
             try:
                 result = execute_janitor_transaction(w3, chain_config, target, self.tx_builder)
             except Exception as tx_error:
@@ -316,6 +321,30 @@ class JanitorBot:
                         print(f"     Rewards received:")
                         for reward in actual_rewards['rewards']:
                             print(f"       - {reward['amount']:.6f} {reward['symbol']}")
+                    
+                    # Check wallet balances after harvest and verify
+                    time.sleep(2)  # Wait for transaction to settle
+                    after_balances = self.wallet_monitor.check_balances(chain_name, chain_config)
+                    verification = self.wallet_monitor.verify_harvest_reward(
+                        chain_name, result['tx_hash'], before_balances, after_balances
+                    )
+                    
+                    if verification['verified']:
+                        print(f"  ✅ Wallet balance confirmed! Rewards received:")
+                        for token, amount in verification['rewards_received'].items():
+                            print(f"     + {amount:.6f} {token} added to wallet")
+                    else:
+                        print(f"  ⚠️  Could not verify wallet balance change")
+                    
+                    # Print wallet summary periodically (every 10th harvest)
+                    if hasattr(self, 'harvest_count'):
+                        self.harvest_count += 1
+                    else:
+                        self.harvest_count = 1
+                    
+                    if self.harvest_count % 10 == 0:
+                        summary = self.wallet_monitor.get_balance_summary(chain_name, chain_config)
+                        print(summary)
                     
                 except Exception as e:
                     logger.warning(f"Could not analyze receipt: {e}")
@@ -494,6 +523,18 @@ class JanitorBot:
                        daily_net_usd=daily_net,
                        daily_runs=daily_runs,
                        daily_failures=daily_failures)
+            
+            # Show wallet balances at startup
+            print(f"{'='*60}")
+            print(f"WALLET BALANCE CHECK")
+            print(f"{'='*60}")
+            for chain_name, chain_config in self.config['chains'].items():
+                try:
+                    summary = self.wallet_monitor.get_balance_summary(chain_name, chain_config)
+                    print(summary)
+                except Exception as e:
+                    print(f"  ❌ Could not check {chain_name} wallet: {e}")
+            print(f"{'='*60}\n")
             
             # Initialize liquidation module if enabled
             self._initialize_liquidations()
